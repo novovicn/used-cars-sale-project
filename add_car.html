@@ -6,7 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <nav>
+        <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./add_car.html">Add car</a></li>
+            <li><a href="./carlist.html">Car list</a></li>
+        </ul>
+    </nav>
+<!-- fali form -->
+<form id="add__car--form" action="./carlist.html">
     <label for="brand">Brand:</label>
     <input type="text" name="brand" id="brand">
     <br>
@@ -20,10 +28,14 @@
     <input type="text" name="imageURL" id="imageURL">
     <br>
     <label for="mileage">Mileage:</label>
-    <input type="text" name="mileage" id="mileage">
+    <input type="text" name="mileage" id="mileage"> 
     <br>
     <button type="submit" id="submit">Add car</button>
+</form>
 
+<h1 id="please__login"></h1>
+
+    <a href="./carlist.html" target="_blank">Carlist</a>
     <script src="addCar.js"></script>
 </body>
 </html>
