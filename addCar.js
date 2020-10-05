@@ -21,11 +21,11 @@ window.onload = function(){
         
             }else{
                 document.getElementById('add__car--form').style.display="none";
-                document.getElementById('please__login').innerHTML = "Please <a href='./index.html'>log in</a> to add your car";
+                document.getElementById('please__login').innerHTML = "Please <a href='./index.html'>log in</a> to add your car!";
             }
         }else{
             document.getElementById('add__car--form').style.display="none";
-                document.getElementById('please__login').innerHTML = "Please <a href='./index.html'>log in</a> to add your car";
+                document.getElementById('please__login').innerHTML = "Please <a href='./index.html'>log in</a> to add your car!";
         }
 
     
@@ -40,7 +40,12 @@ window.onload = function(){
 
 
 // tesko ce ici ovo sa ImageURL jer ce gugl verovatno zabraniti, tako da cu morati ako nema imageURL da izbacim 
-// neku sliku koja je u mom folderu, ili da ukinem to nego da sam sa vikipedie vuce tu sliku 
+// neku sliku koja je u mom folderu, ili da ukinem to nego da sam sa vikipedie vuce tu sliku
+
+
+// videti za neki ID zbog remove itd 
+
+
 
 function addCartoLS(){
 
@@ -49,6 +54,8 @@ function addCartoLS(){
     const year = document.getElementById('year').value;
     let imageURL = document.getElementById('imageURL').value;
     const mileage = document.getElementById('mileage').value;
+    const vin = document.getElementById('vin').value;
+    const price = document.getElementById('price').value;
 
     if(imageURL == ""){
         imageURL = "https://www.auto123.com/static/auto123/images/unknown.692d9ec5c563.png"
@@ -63,7 +70,10 @@ function addCartoLS(){
         year: year, 
         imageURL: imageURL,
         mileage: mileage,
-        owner: loggedUser.username
+        owner: loggedUser.username,
+        VIN: vin,
+        price: price,
+        sold: false
     }
 
     let carList = retrieveCarsLS();

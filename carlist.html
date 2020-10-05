@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="carlist.css">
 </head>
 <body>
-    <nav>
+    <nav class="navigation">
         <ul>
             <li><a href="./index.html">Home</a></li>
             <li><a href="./add_car.html">Add car</a></li>
@@ -15,11 +15,37 @@
         </ul>
 
     </nav>
-    <h1 style="text-align: center;">Cars on sale</h1>
+    <h1 class="carlist__heading" style="text-align: center;">Cars on sale</h1>
 
     <div class="container">
         
     </div>
+
+    <!-- CART: -->
+
+<div id="buy__checkout">
+    <h1>Are you sure you want to buy:</h1>
+    <table id="buy__checkout--table">
+        <tr>
+            <th>Photo:</th>
+            <th>Car:</th>
+            <th>Year:</th>
+            <th>VIN:</th>
+            <th>Price:</th>
+        </tr>
+        <!-- napraviti u JS: -->
+        <!-- <tr>
+            <td><img src="" alt=""></img></td>
+            <td>Audi A3</td>
+            <td>2007</td>
+            <td>228656</td>
+            <td>WAUZZZ8P0....</td>
+        </tr> -->
+    </table>
+    <button class="buy__approve">Yes, buy!</button>
+    <a href="./carlist.html" clas="buy__cancel">No, cancel</a>
+</div>
+    
 
     <script src="carlist.js"></script>
 </body>
