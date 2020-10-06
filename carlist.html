@@ -15,10 +15,17 @@
         </ul>
 
     </nav>
-    <h1 class="carlist__heading" style="text-align: center;">Cars on sale</h1>
-
-    <div class="container">
-        
+    <div id="carlist">
+        <h1 class="carlist__heading" style="text-align: center;">Cars on sale</h1>  
+        <input type="text" name="search__brand" id="search__brand">
+        <br>
+        <label for="search__price--lowest">Price from:</label>
+        <input type="number" name="search__price--lowest" id="search__price--lowest"  placeholder="min">
+        <label for="search__price--highest">to:</label>
+        <input type="number" name="search__price--highest" id="search__price--highest" placeholder="max">
+        <button id="search__price">Search</button>
+        <div class="container"> 
+        </div>
     </div>
 
     <!-- CART: -->
