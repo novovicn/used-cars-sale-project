@@ -6,11 +6,14 @@ AKO neulogovan gledas carlist, ne treba nijedno dugme da se prikazuje, samo da p
 
 const container = document.getElementsByClassName('container')[0];
 const carlist = JSON.parse(localStorage.getItem('cars'));
+const buy__checkout = document.getElementById('buy__checkout');
+const more__info__section = document.getElementsByClassName('more__info__section')[0];
 
 
 
 window.onload = () => {
-    document.getElementById('buy__checkout').style.display = 'none';
+    buy__checkout.style.display = 'none';
+    more__info__section.style.display = 'none';
     renderElements(carlist);
 }
 
@@ -94,7 +97,7 @@ function addItemToCart(e){
     document.getElementById('carlist').style.display = 'none';
     document.getElementsByClassName('carlist__heading')[0].style.display = 'none';
 
-    document.getElementById('buy__checkout').style.display='block';
+    buy__checkout.style.display='block';
 
     const itemToBuy = e.target.parentNode.parentNode;
 
@@ -141,8 +144,51 @@ function deleteItem(e){
 }
 
 
-function moreInfo(){
-    alert('Coming soon! Stay tuned!!');
+function moreInfo(e){
+
+    buy__checkout.style.display="none";
+    container.style.display = 'none';
+    more__info__section.style.display = 'inherit';
+
+
+    const carModelInfo = e.target.parentNode.parentNode.children[1].children[0].textContent;
+    // const model = e.target.parentNode.parentNode.children[1].children[0].children[1].textContent;
+    // let carModelInfo = brand+" "+model;  //DUMMY DATA !!! nead real user inputs s o o n ! ! ! 
+
+    console.log(carModelInfo);
+
+    let wikiLink = `https://en.wikipedia.org/w/api.php?action=query&titles=${carModelInfo}&prop=extracts|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*`;
+
+    fetch(wikiLink)
+    .then(response => response.json())
+    .then(data => {
+        const pages = data.query.pages;
+        const article = Object.values(pages)[0];
+        const imgSrc = article.thumbnail.source;
+ 
+        document.getElementById('more__info--spinner').style.display='none';
+
+        more__info__section.innerHTML = `
+        <button class="more__info--cancel onclick="funcX()">X</button>
+        <img src="${imgSrc}"/>
+        <br/>
+        <div>
+        <p> ${article.extract.substring(0,1000)}<a href=${article.fullurl}>[read more on wikipedia..]</a></p>
+        </div>
+        `;
+    }).catch(err => {
+        more__info__section.innerHTML = "No such car on this planet!";
+    });
+
+    
+}
+
+// exit from more info...
+function funcX(){
+    buy__checkout.style.display="none";
+    container.style.display = 'grid';
+    more__info__section.style.display = 'none';
+
 }
 
 
