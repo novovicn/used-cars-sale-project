@@ -1,6 +1,6 @@
 
 /*
-AKO neulogovan gledas carlist, ne treba nijedno dugme da se prikazuje, samo da pise LOG IN to buy a car
+AKO neulogovan gledas carlist, ne treba nijedno dugme da se prikazuje, samo da pise LOG IN to buy a car --d o n e
 
 */ 
 
@@ -26,13 +26,27 @@ async function renderElements(elements){
     container.innerHTML = '';
     
     if(elements != null){
+
+        // newest first
+        for(let i = 0; i < elements.length -1; i++){
+            for( let j = i+1; j < elements.length; j++){
+                if(elements[i].created_at < elements[j].created_at){
+                    let temp = elements[i];
+                    elements[i] = elements[j];
+                    elements[j] = temp;
+                }
+            }
+        }
+
         for ( let i = 0; i < elements.length; i++){
             // console.log(elements[i]);
             // CONDITIONAL RENDERING - owner can delete the post, while other users can buy it
             if(elements[i].owner == currentUser){
-                var main_button = "<button class='delete__car'>Delete car </button>"
+                var main_button = "<button class='main__button delete__car'>Delete car </button>"
+            }else if(!currentUser){
+                var main_button = '<p class="main__button ">log in to buy</p>';
             }else{
-                var main_button = "<button class='buy__car'>Buy this car </button>"
+                var main_button = "<button class='main__button buy__car'>Buy this car </button>"
             }
             if(elements[i].sold === true){
                 image_url = "https://www.benchmarkrealty.co.nz/wp-content/uploads/2018/06/sold-stamp-3.png";
@@ -66,7 +80,6 @@ async function renderElements(elements){
     }else{
         container.innerHTML= "There aren't any cars for sale at the moment!";
     }
-
     await addListeners();
         
 }

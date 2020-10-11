@@ -73,7 +73,8 @@ function addCartoLS(){
         owner: loggedUser.username,
         VIN: vin,
         price: price,
-        sold: false
+        sold: false,
+        created_at: Date.now()
     }
 
     let carList = retrieveCarsLS();
