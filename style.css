@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -6,49 +8,118 @@
 
 body{
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #272727;
+    
+}
+
+.main__container{
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    background-color: white;
+}
+
+a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+
+}
+
+ul{
+    list-style-type: none;
 }
 
 
 .authentification_nav{
     display: flex;
-    justify-content: flex-end;
-
+    justify-content: space-between;
+    align-items: center;
+    background-color:white;
+    height: 70px;
 }
 
 .authentification_nav > button{
-    margin-right: 15px;
-    margin-top: 15px;
     height: 35px;
     width: 70px;
-    font-size: 1.3rem;
+    font-size: 0.95rem;
     border: none;
     background-color: transparent;
     cursor: pointer;
 }
 
+#nav_login{
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-right: 5px;
+}
 
 #nav_register{
     width: 120px;
 }
 
+#user__reg--heading, #user__log--heading{
+    text-align: center;
+}
+
 
 @keyframes moveInFromRight {
-    0%{right: -500px;}
-    90%{right: 20px;}
-    100%{right:0;}
+    0%{right: -500px; opacity: 0;}
+    90%{right: 20px; opacity: 0.7;}
+    100%{right:0; opacity: 1;}
 }
 
 #user_registration, #user_login{
-    border: 1px solid red;
+    border: none;
+    border-radius: 5px;
     width: 25%;
     margin-top: 20px;
     position: absolute;
-    top: 50px;
+    top: 100px;
     right: 10px;
     /* text-align: center; */
     animation: moveInFromRight .8s;
     padding: 25px;
+    background-color: rgba(255,255,255,0.3);
 }
+
+#user_registration input, #user_login input{
+    border-radius: 25px;
+    border: none;
+    padding-left: 10px;
+    margin-top: 10px;
+
+}
+#user_registration input[type="submit"], #user_login input[type="submit"]{
+    background-color: rgba(80,0,0, 0.9);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+
+}
+
+
+#user_registration input[type="submit"]:disabled{
+    background-color: rgba(255,255,255,0.2);
+    color: gray;
+}
+
+.cancel_auth_form{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    border: 1px solid darkred;
+    background-color: transparent;
+    color: darkred;
+}
+
+
 .form-group{
     /* display: flex;
     justify-content: flex-start;
@@ -77,6 +148,10 @@ body{
     align-items: center;
 }
 
+.checkbox_agree label{
+    font-size: 0.95rem;
+}
+
 #agree_terms{
     width: 7%;
     margin: 10px;
@@ -90,4 +165,152 @@ body{
 
 .reg_buttons > input{
     width: 40%;
+}
+
+.reg_buttons #submit_reg{
+    flex-grow: 5;
+    margin-right: 10px;
+}
+
+.reg_buttons #cancel_reg{
+    width: 20%;
+    background:none;
+    font-size: 1.5rem;
+    color: red;
+}
+
+
+
+.navigation {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-weight: bold;
+    /* margin-top: 30px; */
+    font-size: 1.1rem;
+    background-color: rgba(0,0,0, 0.9);
+    /* background-color: black; */
+    height: 50px;
+    
+}
+
+.active{
+    color:rgb(255, 81, 0);
+}
+
+#logo_and_auth{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+#main__image{
+    color: white;
+}
+
+
+#main__page--logo a{
+    color: teal;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+}
+
+.navigation > ul {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navigation a{
+    font-size: bold;
+    transition: all .5s;
+}
+
+.navigation a:hover { 
+    color:rgb(255, 81, 0);
+}
+
+#main__image{
+    width: 100%;
+    height: 70vh;
+    background: linear-gradient(90deg, rgba(2,0,36,0.3) 0%, rgba(47,49,49,0.4) 100%), url(./img/2018-BMW-M4-004-1080.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#main__image h1{
+    font-size: 40px;
+    position: absolute;
+    top: 12%;
+    right: 5%;
+}
+
+#main__image p{
+    position: absolute;
+    margin-top: 10px;
+    top: 20%;
+    right: 5%;
+    width: 30%;
+}
+
+
+/* CAR NEWS */
+
+#car__news{
+    height: 600px;
+}
+
+#car__news .container{
+    width: 80%; 
+    height: 80%;
+    border: 1px solid black;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+#car__news .container .image{
+    /* width: 100%; */
+    padding-top:80px;
+    padding-right: 80%;
+
+
+
+}
+
+#car__news .container .image img{
+    width: 100%;
+}
+/* ABOUT */
+
+#about{
+    height: 500px;
+    background-color: lightgreen;
+}
+
+.about__container{
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 100px;
+}
+
+.about__heading{
+    text-transform: uppercase;
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+
+/* FOOTER */
+#footer{
+    height: 120px;
+    background-color: darkgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

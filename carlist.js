@@ -6,14 +6,14 @@ AKO neulogovan gledas carlist, ne treba nijedno dugme da se prikazuje, samo da p
 
 const container = document.getElementsByClassName('container')[0];
 const carlist = JSON.parse(localStorage.getItem('cars'));
-const buy__checkout = document.getElementById('buy__checkout');
-const more__info__section = document.getElementsByClassName('more__info__section')[0];
+const buyCheckout = document.getElementById('buy__checkout');
+const moreInfoSection = document.getElementsByClassName('more__info__section')[0];
 
 
 
 window.onload = () => {
-    buy__checkout.style.display = 'none';
-    more__info__section.style.display = 'none';
+    buyCheckout.style.display = 'none';
+    moreInfoSection.style.display = 'none';
     renderElements(carlist);
 }
 
@@ -42,11 +42,9 @@ async function renderElements(elements){
             // console.log(elements[i]);
             // CONDITIONAL RENDERING - owner can delete the post, while other users can buy it
             if(elements[i].owner == currentUser){
-                var main_button = "<button class='main__button delete__car'>Delete car </button>"
-            }else if(!currentUser){
-                var main_button = '<p class="main__button ">log in to buy</p>';
+                var main_button = "<button class='main__button delete__car'>Delete</button>"
             }else{
-                var main_button = "<button class='main__button buy__car'>Buy this car </button>"
+                var main_button = "<button class='main__button buy__car'>Buy</button>"
             }
             if(elements[i].sold === true){
                 image_url = "https://www.benchmarkrealty.co.nz/wp-content/uploads/2018/06/sold-stamp-3.png";
@@ -63,22 +61,20 @@ async function renderElements(elements){
                 <img class="carlist__image" src="${image_url}"/>
                 <div class="carlist__about">
                     <h2 class='carlist__brand_and_model'>${elements[i].brand}  ${elements[i].model}</h2>
-                    <h3>Year: <span class='carlist__year'>${elements[i].year}</span></h3>
-                    <h4>Owner:<span class='carlist__owner'>${elements[i].owner}</span></h4>
-                    <p class="carlist__vin">${elements[i].VIN}</p>
-                    <h1>Price: <span class="carlist__price"> ${elements[i].price}</span>€</h1>
+                    <h3>€<span class="carlist__price"> ${elements[i].price}</span></h3>
+                    <h4 class="carlist__vin hidden">${elements[i].VIN}</h4>
                 </div>
                 <div class="carlist__buttons">
-                    <button class="see__more">More info</button>
+                    <button class="see__more">Details</button>
                     ${main_button}
                 </div>
             </div>
             `
             container.appendChild(car);
-            console.log('Uradjeno!');
+            // console.log('Uradjeno!');
         }
     }else{
-        container.innerHTML= "There aren't any cars for sale at the moment!";
+        container.innerHTML= "<h1 class='no_cars'>There aren't any cars for sale at the moment!</h1>";
     }
     await addListeners();
         
@@ -107,17 +103,19 @@ function addListeners(){
 
 function addItemToCart(e){
 
-    document.getElementById('carlist').style.display = 'none';
+
+    if(currentUser){
+        document.getElementById('carlist').style.display = 'none';
     document.getElementsByClassName('carlist__heading')[0].style.display = 'none';
 
-    buy__checkout.style.display='block';
+    buyCheckout.style.display='block';
 
     const itemToBuy = e.target.parentNode.parentNode;
 
     let imageURL = itemToBuy.getElementsByClassName('carlist__image')[0].src;
     let modelInfo = itemToBuy.getElementsByClassName('carlist__brand_and_model')[0].textContent;
-    let year = itemToBuy.getElementsByClassName('carlist__year')[0].textContent;
-    let owner = itemToBuy.getElementsByClassName('carlist__owner')[0].textContent;
+    // let year = itemToBuy.getElementsByClassName('carlist__year')[0].textContent;
+    // let owner = itemToBuy.getElementsByClassName('carlist__owner')[0].textContent;
     let vin = itemToBuy.getElementsByClassName('carlist__vin')[0].textContent;
     let price = itemToBuy.getElementsByClassName('carlist__price')[0].textContent;
 
@@ -130,19 +128,51 @@ function addItemToCart(e){
     cart_row.innerHTML = `
         <td><img src="${imageURL}"></img></td>
         <td>${modelInfo}</td>
-        <td>${year}</td>
+        <td>${vin}</td>
         <td>${vin}</td>
         <td>${price}</td>
     `
     cart.appendChild(cart_row);
 
+    }else{
+        alert('Please log in first!'); //SREDITI.....
+    }
 
-    // code here to add item to cart...
+    
+}
+
+function buyACar(e){
+
+    console.log(e.target.parentNode.children[1]);
+
+    let VIN = e.target.parentNode.children[1].children[1].children[2].textContent;
+     //getting VIN number
+
+    let carsFromLS = JSON.parse(localStorage.getItem('cars'));
+
+    carsFromLS.forEach( car => {
+        if( car.VIN === VIN ){
+            car.sold = true;
+        }
+    });
+
+    alert('car successfully bought!');
+    
+    document.getElementById('carlist').style.display = 'inherit';
+    document.getElementsByClassName('carlist__heading')[0].style.display = 'inherit';
+    buyCheckout.style.display='none';
+    window.location.reload();
+
+
+    localStorage.setItem('cars', JSON.stringify(carsFromLS));
+
 }
 
 function deleteItem(e){
 
-    let deleteVin = e.target.parentNode.parentNode.children[1].children[3].textContent; //mozda postoji laksi nacin da se do ovoga dodje
+
+
+    let deleteVin = e.target.parentNode.parentNode.children[1].children[2].textContent; //mozda postoji laksi nacin da se do ovoga dodje
 
     let stored_cars = JSON.parse(localStorage.getItem('cars'));
 
@@ -159,16 +189,50 @@ function deleteItem(e){
 
 function moreInfo(e){
 
-    buy__checkout.style.display="none";
+    buyCheckout.style.display="none";
     container.style.display = 'none';
-    more__info__section.style.display = 'inherit';
+    moreInfoSection.style.display = 'inherit';
+    document.getElementsByClassName('carlist__heading_and_search')[0].style.display = 'none';
+
+    const carDetails = document.getElementsByClassName('car__details')[0];
+
+    const moreInfoWiki = document.getElementsByClassName('more__info--wiki')[0];
+
+    document.getElementsByClassName('more__info--cancel')[0].addEventListener('click', funcX)
 
 
     const carModelInfo = e.target.parentNode.parentNode.children[1].children[0].textContent;
-    // const model = e.target.parentNode.parentNode.children[1].children[0].children[1].textContent;
-    // let carModelInfo = brand+" "+model;  //DUMMY DATA !!! nead real user inputs s o o n ! ! ! 
+  
+    let moreInfoVin = e.target.parentNode.parentNode.children[1].children[2].textContent;
 
-    console.log(carModelInfo);
+    for( let i = 0; i< carlist.length; i++){
+        if(carlist[i].VIN == moreInfoVin){
+            // console.log(carlist[i]);
+
+            carDetails.innerHTML = `
+                <div class="car_details_image">
+                    <img src="${carlist[i].imageURL}" alt="${carlist[i].brand}${carlist[i].model}" />
+                </div>
+                <div class="car_details_text">
+                    
+                    <h1>Car details</h1>
+                    <br/>
+
+                    <p><span class='bold'>Brand:</span> ${carlist[i].brand}</p>
+                    <p><span class='bold'>Model:</span> ${carlist[i].model}</p>
+                    <p><span class='bold'>Year:</span> ${carlist[i].year}</p>
+                    <p><span class='bold'>Owner:</span> ${carlist[i].owner}</p>
+                    <p><span class='bold'>Mileage:</span> ${carlist[i].mileage}</p>
+                    <p><span class='bold'>VIN:</span> ${carlist[i].VIN}</p>
+                    <h1><span class='bold'>Price:</span> ${carlist[i].price} €</h1>
+                </div>
+            `
+
+        }
+    }
+
+
+    // console.log(moreInfoVin);
 
     let wikiLink = `https://en.wikipedia.org/w/api.php?action=query&titles=${carModelInfo}&prop=extracts|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*`;
 
@@ -181,8 +245,7 @@ function moreInfo(e){
  
         document.getElementById('more__info--spinner').style.display='none';
 
-        more__info__section.innerHTML = `
-        <button class="more__info--cancel onclick="funcX()">X</button>
+        moreInfoWiki.innerHTML = `
         <img src="${imgSrc}"/>
         <br/>
         <div>
@@ -190,23 +253,17 @@ function moreInfo(e){
         </div>
         `;
     }).catch(err => {
-        more__info__section.innerHTML = "No such car on this planet!";
-    });
+        document.getElementById('more__info--spinner').style.display='none';
+        moreInfoWiki.innerHTML = "No such car on this planet!";
+    })
 
     
 }
 
 // exit from more info...
 function funcX(){
-    buy__checkout.style.display="none";
-    container.style.display = 'grid';
-    more__info__section.style.display = 'none';
-
+    window.location.reload();
 }
-
-
-
-// OVDE BI trebala neka promisa da padne jer nece uvek biti auta na sajtu........
 
 
 const ApproveBuyBtns = document.getElementsByClassName('buy__approve');
@@ -214,21 +271,7 @@ for( let i = 0; i < ApproveBuyBtns.length; i++ ){
     ApproveBuyBtns[i].addEventListener('click', buyACar);
 }
 
-function buyACar(e){
-    let VIN = e.target.parentNode.children[1].children[1].children[3].textContent; //getting VIN number
 
-    let carsFromLS = JSON.parse(localStorage.getItem('cars'));
-
-    carsFromLS.forEach( car => {
-        if( car.VIN === VIN ){
-            car.sold = true;
-        }
-        console.log(car);
-    });
-
-    localStorage.setItem('cars', JSON.stringify(carsFromLS));
-
-}
 
 // FILTERING 
 

@@ -97,7 +97,7 @@ function registerUser(e){
 
     if(registeredUsers != null){
         for( let i = 0; i < registeredUsers.length; i++){
-            if(registeredUsers[i].username == username) {
+            if((registeredUsers[i].username).toUpperCase() === username.toUpperCase()) {
                 document.getElementById('reg_username').style.border = '2px solid red'
                 username_error.innerHTML = "Username already taken";
                 return;
@@ -161,34 +161,39 @@ function logUserIn(e){
 
 
     let registeredUsers = retrieveUsersLS();
-    console.log(registeredUsers.length);
+    // console.log(registeredUsers.length);
 
     let username = document.getElementById('login_username').value.trim();
     let password = document.getElementById('login_password').value.trim();
 
 
-    for(let i = 0; i < registeredUsers.length; i++){
-        if(registeredUsers[i].username == username){
-            document.getElementById('login__username--error').style.display= "none";
-            console.log(password+" "+registeredUsers[i].password); 
-            if(registeredUsers[i].password == password){
-                loggedUser.username = username;
-                loggedUser.password = password;
-                sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser));
-                window.location.reload();
-                // return;
+    if(registeredUsers){
+        for(let i = 0; i < registeredUsers.length; i++){
+            if(registeredUsers[i].username == username){
+                document.getElementById('login__username--error').style.display= "none";
+                console.log(password+" "+registeredUsers[i].password); 
+                if(registeredUsers[i].password == password){
+                    loggedUser.username = username;
+                    loggedUser.password = password;
+                    sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+                    window.location.reload();
+                    // return;
+                }else{
+                    document.getElementById('login__password--error').innerText="Wrong password";
+                    return false;
+                }
+    
             }else{
-                document.getElementById('login__password--error').innerText="Wrong password";
-                return false;
+                document.getElementById('login__username--error').innerText="Invalid username";
+                
             }
-
-        }else{
-            document.getElementById('login__username--error').innerText="Invalid username";
+    
             
         }
-
-        
+    }else{
+        document.getElementById('login__username--error').innerText="No registered users";
     }
+    
 }
 
 let currentylyLoggedUser = JSON.parse(sessionStorage.getItem('loggedUser'));
@@ -236,4 +241,14 @@ function allowRegistration(){
         document.getElementById('submit_reg').setAttribute('disabled', 'disabled');
     }
     console.log(document.getElementById("agree_terms").checked);
+}
+
+const cancelBtns = document.getElementsByClassName('cancel_auth_form');
+
+for(let i = 0; i< cancelBtns.length; i++){
+    cancelBtns[i].addEventListener('click', (e) =>{
+        e.preventDefault();
+        document.getElementById("user_registration").style.display = 'none';
+        document.getElementById("user_login").style.display = 'none';
+    })
 }

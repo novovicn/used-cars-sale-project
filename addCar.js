@@ -3,6 +3,8 @@ document.getElementById('submit').addEventListener('click', addCartoLS);
 
 const loggedUser = JSON.parse(sessionStorage.getItem('loggedUser'));
 
+const carlist = JSON.parse(localStorage.getItem('cars'));
+
 
 
 window.onload = function(){
@@ -32,21 +34,7 @@ window.onload = function(){
        
     }
 
-
-// TODO: Moras biti ulogovan da bi uopste dosao na ovu stranicu -- DONE
-
-// TODO: Uhvatiti koji korisnik je trenutno u SS i na osnovu toga to ubaciti u polje VLASNIK vozila --DONE
-// , i onda posle kad se klikne na obrisi oglas, to moze da se desi samo ako u tom trenutku u SS username je isto kao i vlasnik vozila
-
-
-// tesko ce ici ovo sa ImageURL jer ce gugl verovatno zabraniti, tako da cu morati ako nema imageURL da izbacim 
-// neku sliku koja je u mom folderu, ili da ukinem to nego da sam sa vikipedie vuce tu sliku
-
-
-// videti za neki ID zbog remove itd 
-
-
-
+    
 function addCartoLS(){
 
     const brand = document.getElementById('brand').value;
@@ -58,8 +46,10 @@ function addCartoLS(){
     const price = document.getElementById('price').value;
 
     if(imageURL == ""){
-        imageURL = "https://www.auto123.com/static/auto123/images/unknown.692d9ec5c563.png"
+        imageURL = "img/unknown.png"
     }
+
+
 
 
     let cars=[];

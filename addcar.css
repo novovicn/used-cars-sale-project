@@ -1,0 +1,72 @@
+
+body{
+    /* width: 100%;
+    height: 100%; */
+    background: linear-gradient(to right ,rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%) ,url(./img/addcar.jpg) center no-repeat fixed;
+    background-size: cover; 
+}
+
+.addcar__container{
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+
+#add__car--form{
+    width: 30%;
+    background-color: rgba(255,255,255,0.4);
+    border-radius: 5px;
+    color: white;
+    position: absolute;
+    left: 2%;
+    top: 15%;
+}
+
+#add__car--form input{
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+}
+
+#add__car--form label{
+    margin-left: 10%;
+}
+
+#submit{
+    margin-left: 10%;
+    border: none;
+    border-radius: 5px;
+    width: 80%;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: black;
+}
+
+#please__login{
+    position: absolute;
+    top: 35%;
+    left: 5%;
+    color: white;
+    font-weight: bold;
+}
+
+#please__login a {
+    text-decoration: none;
+    color: lightgreen;
+}
+
+#please__login .line{
+    width: 50%;
+    border: 2px solid red;
+}
+
+.required{
+    color: red;
+}
