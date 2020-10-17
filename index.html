@@ -7,16 +7,19 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="main__container">
+    <div class="main-container">
       <!-- AUTHENTIFICATION  -->
-      <div id="logo_and_auth">
-        <div id="main__page--logo">
-          <a href="./index.html">Car SHOP</a>
+      <div class="auth-nav">
+        <a href="#">
+        <div class="logo">
+          <img src="./img/logobmw1.png" alt="logo">
+          <!-- <p>CAR MARKET</p> -->
         </div>
-        <div class="authentification_nav">
-          <button id="nav_login">LOGIN</button>
-          <button id="nav_register">REGISTER</button>
-          <button id="nav_logout">LOG OUT</button>
+      </a>
+        <div class="authentification-buttons">
+          <button class="login-btn">LOGIN</button>
+          <button class="register-btn">REGISTER</button>
+          <button class="logout-btn">LOG OUT</button>
         </div>
       </div>
       <nav class="navigation">
@@ -28,95 +31,103 @@
           <li><a href="#">Contact</a></li>
         </ul>
       </nav>
+      <div class="hamburger"></div>
+      <div class="small-nav">
+        <a href="index.html">HOME</a>
+        <a href="add_car.html">SELL CAR</a>
+        <a href="carlist.html">FIND CAR</a>
+        <a href="#">ABOUT</a>
+        <a href="#">CONTACT</a>
+      </div>
 
-      <div id="user_authentification">
+      <div id="user-authentification">
         <!-- User registration form -->
-        <form id="user_registration">
-          <h1 id="user__reg--heading">Create Account</h1>
-          <button class="cancel_auth_form">X</button>
-          <div id="registration__errors"></div>
+        <form id="user-registration">
+          <h1 id="user-registration-heading">Create Account</h1>
+          <button class="cancel-auth-form">X</button>
+          <div id="registration-errors"></div>
           <div class="form-group">
-            <label for="reg_name">Full name:</label>
+            <label for="reg-name">Full name:</label>
             <input
               type="text"
-              name="reg_name"
-              id="reg_name"
+              name="reg-name"
+              id="reg-name"
               placeholder="Full name"
             />
-            <p class="input-error reg_name--error"></p>
+            <p class="input-error reg-name-error"></p>
           </div>
           <div class="form-group">
-            <label for="reg_email">Email:</label>
+            <label for="reg-email">Email:</label>
             <input
               type="text"
-              name="reg_email"
-              id="reg_email"
+              name="reg-email"
+              id="reg-email"
               placeholder="Email"
             />
-            <p class="input-error reg_email--error"></p>
+            <p class="input-error reg-email-error"></p>
           </div>
           <div class="form-group">
-            <label for="reg_username">Username:</label>
+            <label for="reg-username">Username:</label>
             <input
               type="text"
-              name="reg_username"
-              id="reg_username"
+              name="reg-username"
+              id="reg-username"
               placeholder="Username"
             />
-            <p class="input-error reg_username--error"></p>
+            <p class="input-error reg-username-error"></p>
           </div>
           <div class="form-group">
-            <label for="reg_password">Password:</label>
+            <label for="reg-password">Password:</label>
             <input
               type="password"
-              name="reg_password"
-              id="reg_password"
+              name="reg-password"
+              id="reg-password"
               placeholder="Password"
             />
-            <p class="input-error reg_password--error"></p>
+            <p class="input-error reg-password-error"></p>
           </div>
-          <div class="checkbox_agree form-group">
-            <input type="checkbox" name="agree_terms" id="agree_terms" />
-            <label for="agree_terms">I agree with terms of use</label>
+          <div class="checkbox-agree form-group">
+            <input type="checkbox" name="agree-terms" id="agree-terms" />
+            <label for="agree-terms">I agree with terms of use</label>
           </div>
-          <div class="form-group reg_buttons">
-            <input value="Register" type="submit" id="submit_reg" disabled />
+          <div class="form-group reg-buttons">
+            <input value="Register" type="submit" id="submit-reg" disabled />
             <!-- buttons need classes -->
           </div>
         </form>
         <!-- User login form -->
-        <form id="user_login">
-          <h1 id="user__log--heading">Sign in</h1>
-          <button class="cancel_auth_form">X</button>
-          <div id="login__errors"></div>
+        <form id="user-login">
+          <h1 id="user-login-heading">Sign in</h1>
+          <button class="cancel-auth-form">X</button>
+          <div id="login-errors"></div>
           <div class="form-group">
-            <label for="login_username">Username:</label>
+            <label for="login-username">Username:</label>
             <input
               type="text"
-              name="login_username"
-              id="login_username"
+              name="login-username"
+              id="login-username"
               placeholder="Username"
             />
-            <p id="login__username--error"></p>
+            <p id="login-username-error"></p>
           </div>
           <div class="form-group">
-            <label for="login_password">Password:</label>
+            <label for="login-password">Password:</label>
             <input
               type="password"
-              name="login_password"
-              id="login_password"
+              name="login-password"
+              id="login-password"
               placeholder="Password"
             />
-            <p id="login__password--error"></p>
+            <p id="login-password-error"></p>
           </div>
           <div class="form-group text-center">
-            <input value="Sign in" type="submit" id="submit_login" />
+            <input value="Sign in" type="submit" id="submit-login" />
             <!-- buttons need classes -->
           </div>
         </form>
       </div>
 
-      <div id="main__image">
+      <div id="main-image">
         <h1>Welcome to car shop.</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae maxime
@@ -126,10 +137,10 @@
         </p>
       </div>
 
-      <section id="car__news">
+      <section id="car-news">
         <div class="container">
-          <div class="text_content">
-            <h1 id="car__news--heading">We create and turn into reality</h1>
+          <div class="text-content">
+            <h1 id="car-news-heading">We create and turn into reality</h1>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
               optio eius ipsam, perferendis alias dignissimos quia assumenda
@@ -142,65 +153,9 @@
           </div>
         </div>
       </section>
-
-      <!-- <section id="car__news">
-        <h1 id="car__news--heading">The Latest Car News and Trends</h1>
-        <div class="car__news--container">
-          <article class="car__news--article car__news--article1">
-            <img class="news_image news_image1" src="./img/news1.jpg" alt="" />
-            <h2 class="news_heading news_heading1">
-              2023 bmw x8 spy shots: Flagship SUV in the works
-            </h2>
-            <p class="news_text news_text1">
-              Rumors of a new BMW SUV positioned above the X7 have persisted for
-              years and now we have evidence that one is in fact coming.
-              <br>
-              <br>
-              A prototype for the new flagship SUV has been spotted, and it
-              reveals that designers have adopted the sloped roof of the X2
-              instead of the flat roof of the X5 and X7 and coupe-like roof of
-              the X4 and X6.
-              <a href="https://www.motorauthority.com/news/1115876_2023-bmw-x8-spy-shots-flagship-suv-in-the-works">Read more...</a>
-            </p>
-          </article>
-          <article class="car__news--article car__news--article2">
-            <img class="news_image news_image2" src="./img/news2.jpg" alt="" />
-            <div>
-              <h2 class="news_heading news_heading2">
-                Mercedes, Bosch to trial automated valet at German airport
-              </h2>
-              <p class="news_text news_text2">
-                Getting to your flight on time can be stressful but
-                Mercedes-Benz and automotive supplier Bosch are looking to take
-                some of the presssure off by eliminating the need to find a
-                parking spot at the airport's garage. <br />
-                <br />
-                The two companies in 2017 first demonstarted an automated valet
-                system, and in 2019 they received the green light to install the
-                system in public parking garages. Now, they've teamed up with
-                airport parking management company Apcoa to install one of the
-                systems at the main airport in Mercedes' hometown of Stuttgart,
-                Germany. <br />
-                <br />
-                You simply drive to a designated drop-off point at the entrance
-                of the car park, hop out and then use a smartphone app to send
-                the car to an assigned parking space. The system relies on
-                Bosch-developed sensors and cameras fitted to both the parking
-                garage and in Mercedes' latest cars, demonstrated here with the
-                new 2021 S-Class. Later, the car returns to the drop-off point
-                in the same fashion.
-                <br />
-                <a href="https://www.motorauthority.com/news/1129916_mercedes-bosch-to-trial-automated-valet-at-german-airport">Read more...</a>
-              </p>
-            </div>
-          </article>
-           <article class="car__news--article">One article</article> 
-        </div>
-      </section> -->
-
       <section id="about">
-        <div class="container about__container">
-          <h1 class="about__heading">About</h1>
+        <div class="container about-container">
+          <h1 class="about-heading">About</h1>
           <p>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit.
             Consequatur eligendi corrupti enim delectus doloribus, repudiandae
@@ -232,6 +187,7 @@
         <h4>&copy; Corpyright Nenad Novovic 2020</h4>
       </footer>
     </div>
+    <script src="main.js"></script>
     <script src="auth.js"></script>
   </body>
 </html>

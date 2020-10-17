@@ -9,11 +9,15 @@
     <link rel="stylesheet" href="addcar.css" />
   </head>
   <body>
-    <div class="addcar__container">
+    <div class="add-car-container">
       <nav class="navigation">
-        <div id="logo">
-          <a href="./index.html">Car SHOP</a>
-        </div>
+        <!-- <div id="logo">
+          <a href="./index.html">
+            <div class="logo">
+              <img src="./img/logobmw1.png" alt="logo">
+            </div>
+          </a>
+        </div> -->
         <ul>
           <li><a href="./index.html">Home</a></li>
           <li><a class="active" href="./add_car.html">Sell car</a></li>
@@ -22,8 +26,28 @@
           <li><a href="#">Contact</a></li>
         </ul>
       </nav>
+      <div class="hamburger"></div>
+      <div class="small-nav">
+        <a href="./index.html">HOME</a>
+        <a href="carlist.html">SELL CAR</a>
+        <a href="./carlist.html">FIND CAR</a>
+        <a href="#">ABOUT</a>
+        <a href="#">CONTACT</a>
+      </div>
       <!-- fali form -->
-      <form id="add__car--form" action="./carlist.html">
+
+      <h1 class="add-car-heading">Put your car on sale.</h1>
+
+      <div class="car-added">
+        <h1>
+          Car successfully <br />
+          added for sale!
+        </h1>
+        <a href="./carlist.html">OK</a>
+      </div>
+
+      <form id="add-car-form" action="./carlist.html">
+        <div id="car-form-errors"></div>
         <div class="form-group">
           <label for="brand"><span class="required">*</span>Brand:</label>
           <input type="text" name="brand" id="brand" />
@@ -34,14 +58,14 @@
         </div>
         <div class="form-group">
           <label for="year"><span class="required">*</span>Year:</label>
-          <input type="number" name="year" id="year" min="1900" max="2020" />
+          <input type="number" name="year" id="year" />
         </div>
         <div class="form-group">
-          <label for="imageURL">ImageURL:</label>
+          <label for="image-url">image URL:</label>
           <input
             type="text"
-            name="imageURL"
-            id="imageURL"
+            name="image-url"
+            id="image-url"
             placeholder="https://www.googleimages..."
           />
         </div>
@@ -65,11 +89,14 @@
         </div>
       </form>
 
-      <div id="please__login">
-        <h1 id="please__login--heading"></h1>
+      <div id="login-prompt">
+        <h1 id="login-prompt-heading">
+          Please <a href="index.html">LOG IN</a> to access this page!
+        </h1>
         <div class="line"></div>
       </div>
 
+      <script src="main.js"></script>
       <script src="addCar.js"></script>
     </div>
   </body>

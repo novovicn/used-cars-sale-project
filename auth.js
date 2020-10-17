@@ -8,32 +8,36 @@ koja ga boji kada se ustanovi greska na njemu...
 
 */
 
+const registerSubmit = document.getElementById('submit-reg');
+const loginSubmit = document.getElementById('submit-login');
+const registrationForm = document.getElementById('user-registration');
+const loginForm = document.getElementById('user-login');
 
-const register = document.getElementById('submit_reg');
-const login = document.getElementById('submit_login');
-const registrationForm = document.getElementById('user_registration');
-const loginForm = document.getElementById('user_login');
+const logoutButton = document.getElementsByClassName('logout-btn')[0];
 
-const logout = document.getElementById('nav_logout');
+const loginButton = document.getElementsByClassName('login-btn')[0];
+const registerButton = document.getElementsByClassName('register-btn')[0];
 
-logout.style.display = 'none';
+logoutButton.style.display = 'none';
 
 window.onload = () => {
-    document.getElementById("user_registration").style.display = 'none';
-    document.getElementById("user_login").style.display = 'none';
+    registrationForm.style.display = 'none';
+    loginForm.style.display = 'none';
 }
 
 let users = [];
 var loggedUser = {};
 
 
-document.getElementById('nav_login').addEventListener('click', () => {
-    document.getElementById("user_registration").style.display = 'none';
-    document.getElementById("user_login").style.display = 'block';
-})
-document.getElementById('nav_register').addEventListener('click', () => {
-    document.getElementById("user_registration").style.display = 'block';
-    document.getElementById("user_login").style.display = 'none';
+loginButton.addEventListener('click', () => {
+    console.log('clicked');
+    registrationForm.style.display = 'none';
+    loginForm.style.display = 'block';
+});
+registerButton.addEventListener('click', () => {
+    console.log('clicked');
+    registrationForm.style.display = 'block';
+    loginForm.style.display = 'none';
 })
 
 registrationForm.onsubmit = registerUser;
@@ -49,19 +53,19 @@ loginForm.onsubmit = logUserIn;
 function registerUser(e){
     e.preventDefault();
 
-    const errorMsg = document.getElementById('registration__errors');
+    const errorMsg = document.getElementById('registration-errors');
 
     let registeredUsers = retrieveUsersLS();
 
-    const name = document.getElementById('reg_name').value;
-    const email = document.getElementById('reg_email').value;
-    const username = document.getElementById('reg_username').value;
-    const password = document.getElementById('reg_password').value;
+    const name = document.getElementById('reg-name').value;
+    const email = document.getElementById('reg-email').value;
+    const username = document.getElementById('reg-username').value;
+    const password = document.getElementById('reg-password').value;
 
-    const name_error = document.getElementsByClassName('reg_name--error')[0];
-    const email_error = document.getElementsByClassName('reg_email--error')[0];
-    const username_error = document.getElementsByClassName('reg_username--error')[0];
-    const password_error = document.getElementsByClassName('reg_password--error')[0];
+    const nameError = document.getElementsByClassName('reg-name-error')[0];
+    const emailError = document.getElementsByClassName('reg-email-error')[0];
+    const usernameError = document.getElementsByClassName('reg-username-error')[0];
+    const passwordError = document.getElementsByClassName('reg-password-error')[0];
 
     // All the fields must be populated 
 
@@ -73,22 +77,22 @@ function registerUser(e){
     // NAME
 
     if(name.length <2){
-        name_error.innerHTML = "Name must contain at least 2 letters";
+        nameError.innerHTML = "Name must contain at least 2 letters";
         return;
     }
 
-    let name_regexp = /^[a-zA-Z ]+$/.test(name);
+    let nameRegExp = /^[a-zA-Z ]+$/.test(name);
 
-    if(!name_regexp){
-        name_error.innerHTML="Name should contain only letters and spaces";
+    if(!nameRegExp){
+        nameError.innerHTML="Name should contain only letters and spaces";
         return;
     }
 
     // EMAIL
-    const email_pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    const emailPattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
-    if (email_pattern.test(email) == false){
-        email_error.innerHTML = "Invalid email address";
+    if (emailPattern.test(email) == false){
+        emailError.innerHTML = "Invalid email address";
         return;
     }
 
@@ -98,8 +102,8 @@ function registerUser(e){
     if(registeredUsers != null){
         for( let i = 0; i < registeredUsers.length; i++){
             if((registeredUsers[i].username).toUpperCase() === username.toUpperCase()) {
-                document.getElementById('reg_username').style.border = '2px solid red'
-                username_error.innerHTML = "Username already taken";
+                document.getElementById('reg-username').style.border = '2px solid red'
+                usernameError.innerHTML = "Username already taken";
                 return;
             }
         }
@@ -123,7 +127,7 @@ function registerUser(e){
     }
 
     if(number == 0 || upperCaseLetters == 0 || lowerCaseLetters == 0){
-        password_error.innerHTML = "Password must contain one number, one Upper case and one Lower case letter";
+        passwordError.innerHTML = "Password must contain one number, one Upper case and one Lower case letter";
         console.log(number, upperCaseLetters, lowerCaseLetters);
         return;
     }
@@ -155,7 +159,6 @@ function registerUser(e){
 // ==========================================================================
 // user login handling 
 
-
 function logUserIn(e){
     e.preventDefault(); 
 
@@ -163,14 +166,16 @@ function logUserIn(e){
     let registeredUsers = retrieveUsersLS();
     // console.log(registeredUsers.length);
 
-    let username = document.getElementById('login_username').value.trim();
-    let password = document.getElementById('login_password').value.trim();
+    let username = document.getElementById('login-username').value.trim();
+    let password = document.getElementById('login-password').value.trim();
+    let usernameError = document.getElementById('login-username-error');
+    let passwordError = document.getElementById('login-password-error');
 
 
     if(registeredUsers){
         for(let i = 0; i < registeredUsers.length; i++){
             if(registeredUsers[i].username == username){
-                document.getElementById('login__username--error').style.display= "none";
+                usernameError.style.display= "none";
                 console.log(password+" "+registeredUsers[i].password); 
                 if(registeredUsers[i].password == password){
                     loggedUser.username = username;
@@ -179,19 +184,19 @@ function logUserIn(e){
                     window.location.reload();
                     // return;
                 }else{
-                    document.getElementById('login__password--error').innerText="Wrong password";
+                    passwordError.innerText="Wrong password";
                     return false;
                 }
     
             }else{
-                document.getElementById('login__username--error').innerText="Invalid username";
+                usernameError.innerText="Invalid username";
                 
             }
     
             
         }
     }else{
-        document.getElementById('login__username--error').innerText="No registered users";
+        usernameError.innerText="No registered users";
     }
     
 }
@@ -199,14 +204,14 @@ function logUserIn(e){
 let currentylyLoggedUser = JSON.parse(sessionStorage.getItem('loggedUser'));
 if(currentylyLoggedUser != null){
     if(currentylyLoggedUser.username != null){
-        logout.style.display = 'inline';
-        document.getElementById('nav_login').style.display = "none";
-        document.getElementById('nav_register').style.display = "none";
+        logoutButton.style.display = 'inline';
+        loginButton.style.display = "none";
+        registerButton.style.display = "none";
     }
 }
 
 // logout
-logout.addEventListener('click', () => {
+logoutButton.addEventListener('click', () => {
     let empty = {};
     sessionStorage.setItem('loggedUser', JSON.stringify(empty));
     window.location.reload();
@@ -218,37 +223,25 @@ function retrieveUsersLS() {
     return usersLS;
 }
 
+const agreeTermsCheckbox = document.getElementById("agree-terms");
 
-// TODO : patterns, style error div, stil za okvir polja koje je pogresno, 
-
-
-
-// RADI OVO ZA STILIZOVANJE FINO LEPO  
-
-// function prikaziGresku(){
-//     document.getElementsByClassName('reg_name--error')[0].innerText = "greska jbg";
-//     document.getElementById('reg_name').style.border = '2px solid red';
-// }
-
-document.getElementById("agree_terms").addEventListener('change', allowRegistration);
+agreeTermsCheckbox.addEventListener('change', allowRegistration);
 
 function allowRegistration(){
-    // alert('change');
-
-    if(document.getElementById("agree_terms").checked){
-        document.getElementById('submit_reg').removeAttribute('disabled');
+    if(agreeTermsCheckbox.checked){
+        registerSubmit.removeAttribute('disabled');
     }else{
-        document.getElementById('submit_reg').setAttribute('disabled', 'disabled');
+        registerSubmit.setAttribute('disabled', 'disabled');
     }
-    console.log(document.getElementById("agree_terms").checked);
+    console.log(agreeTermsCheckbox.checked);
 }
 
-const cancelBtns = document.getElementsByClassName('cancel_auth_form');
+const cancelBtns = document.getElementsByClassName('cancel-auth-form');
 
 for(let i = 0; i< cancelBtns.length; i++){
     cancelBtns[i].addEventListener('click', (e) =>{
         e.preventDefault();
-        document.getElementById("user_registration").style.display = 'none';
-        document.getElementById("user_login").style.display = 'none';
+        registrationForm.style.display = 'none';
+        loginForm.style.display = 'none';
     })
 }

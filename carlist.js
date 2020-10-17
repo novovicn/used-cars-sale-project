@@ -1,13 +1,14 @@
 
 /*
-AKO neulogovan gledas carlist, ne treba nijedno dugme da se prikazuje, samo da pise LOG IN to buy a car --d o n e
+AKO neulogovan gledas carlist, ne treba nijedno dugme da se prikazuje, samo da pise LOG IN to buy a car -d o n e
 
 */ 
 
-const container = document.getElementsByClassName('container')[0];
+const container = document.getElementsByClassName('sale-container')[0];
 const carlist = JSON.parse(localStorage.getItem('cars'));
-const buyCheckout = document.getElementById('buy__checkout');
-const moreInfoSection = document.getElementsByClassName('more__info__section')[0];
+const buyCheckout = document.getElementById('buy-checkout');
+const moreInfoSection = document.getElementsByClassName('more-info-section')[0];
+const carlistHeading = document.getElementsByClassName('carlist-heading')[0];
 
 
 
@@ -42,31 +43,30 @@ async function renderElements(elements){
             // console.log(elements[i]);
             // CONDITIONAL RENDERING - owner can delete the post, while other users can buy it
             if(elements[i].owner == currentUser){
-                var main_button = "<button class='main__button delete__car'>Delete</button>"
+                var mainButton = "<button class='main-button delete-car'>Delete</button>"
             }else{
-                var main_button = "<button class='main__button buy__car'>Buy</button>"
+                var mainButton = "<button class='main-button buy-car'>Buy</button>"
             }
             if(elements[i].sold === true){
                 image_url = "https://www.benchmarkrealty.co.nz/wp-content/uploads/2018/06/sold-stamp-3.png";
                 if(elements[i].owner !== currentUser){
-                    var main_button = ''; // can't be bought anymore, but stll can be deleted by owner!
+                    var mainButton = ''; // can't be bought anymore, but stll can be deleted by owner!
                 }    
             }else{
                 image_url = elements[i].imageURL;
             }
-            // TODO : sakriti dugme kad je auto vec prodat! ---DONE
             let car = document.createElement('div');
             car.innerHTML = `
-            <div class="car__card">
-                <img class="carlist__image" src="${image_url}"/>
-                <div class="carlist__about">
-                    <h2 class='carlist__brand_and_model'>${elements[i].brand}  ${elements[i].model}</h2>
-                    <h3>€<span class="carlist__price"> ${elements[i].price}</span></h3>
-                    <h4 class="carlist__vin hidden">${elements[i].VIN}</h4>
+            <div class="car-card">
+                <img class="carlist-image" src="${image_url}"/>
+                <div class="carlist-about">
+                    <h2 class='carlist-brand-and-model'>${elements[i].brand}  ${elements[i].model}</h2>
+                    <h3>€<span class="carlist-price"> ${elements[i].price}</span></h3>
+                    <h4 class="carlist-vin hidden">${elements[i].VIN}</h4>
                 </div>
-                <div class="carlist__buttons">
-                    <button class="see__more">Details</button>
-                    ${main_button}
+                <div class="carlist-buttons">
+                    <button class="see-more">Details</button>
+                    ${mainButton}
                 </div>
             </div>
             `
@@ -74,7 +74,7 @@ async function renderElements(elements){
             // console.log('Uradjeno!');
         }
     }else{
-        container.innerHTML= "<h1 class='no_cars'>There aren't any cars for sale at the moment!</h1>";
+        container.innerHTML= "<h1 class='no-cars'>There aren't any cars for sale at the moment!</h1>";
     }
     await addListeners();
         
@@ -82,57 +82,59 @@ async function renderElements(elements){
 
 
 function addListeners(){
-    let buy__buttons = document.getElementsByClassName('buy__car');
-    let delete__buttons = document.getElementsByClassName('delete__car');
-    let more__info__buttons = document.getElementsByClassName('see__more');
+    let buyButtons = document.getElementsByClassName('buy-car');
+    let deleteButtons = document.getElementsByClassName('delete-car');
+    let moreInfoButtons = document.getElementsByClassName('see-more');
 
-    for(let i = 0; i < buy__buttons.length; i++){
-        buy__buttons[i].addEventListener('click', addItemToCart);
+    for(let i = 0; i < buyButtons.length; i++){
+        buyButtons[i].addEventListener('click', addItemToCart);
     }
 
-    for(let i = 0; i < delete__buttons.length; i++){
-        delete__buttons[i].addEventListener('click', deleteItem);
+    for(let i = 0; i < deleteButtons.length; i++){
+        deleteButtons[i].addEventListener('click', deleteItem);
     }
 
-    for(let i = 0; i < more__info__buttons.length; i++){
-        more__info__buttons[i].addEventListener('click', moreInfo);
+    for(let i = 0; i < moreInfoButtons.length; i++){
+        moreInfoButtons[i].addEventListener('click', moreInfo);
     }
 
 }
 
-
 function addItemToCart(e){
-
-
     if(currentUser){
         document.getElementById('carlist').style.display = 'none';
-    document.getElementsByClassName('carlist__heading')[0].style.display = 'none';
+    carlistHeading.style.display = 'none';
 
     buyCheckout.style.display='block';
 
     const itemToBuy = e.target.parentNode.parentNode;
 
-    let imageURL = itemToBuy.getElementsByClassName('carlist__image')[0].src;
-    let modelInfo = itemToBuy.getElementsByClassName('carlist__brand_and_model')[0].textContent;
-    // let year = itemToBuy.getElementsByClassName('carlist__year')[0].textContent;
+    let imageURL = itemToBuy.getElementsByClassName('carlist-image')[0].src;
+    let modelInfo = itemToBuy.getElementsByClassName('carlist-brand-and-model')[0].textContent;
+    // let year = itemToBuy.getElementsByClassName('carlist-year')[0].textContent;
     // let owner = itemToBuy.getElementsByClassName('carlist__owner')[0].textContent;
-    let vin = itemToBuy.getElementsByClassName('carlist__vin')[0].textContent;
-    let price = itemToBuy.getElementsByClassName('carlist__price')[0].textContent;
+    let vin = itemToBuy.getElementsByClassName('carlist-vin')[0].textContent;
+    let price = itemToBuy.getElementsByClassName('carlist-price')[0].textContent;
 
-    let cart = document.getElementById('buy__checkout--table');
+    let vinDiv = document.createElement('div');
+    vinDiv.setAttribute('id', 'vin-num');
+    vinDiv.style.display = 'none';
+    vinDiv.innerHTML = `${vin}`;
+
+    let cart = document.getElementById('buy-checkout-table');
 
     cart.style.display = 'inherit';
     
     let cart_row = document.createElement('tr');
 
-    cart_row.innerHTML = `
-        <td><img src="${imageURL}"></img></td>
-        <td>${modelInfo}</td>
-        <td>${vin}</td>
-        <td>${vin}</td>
-        <td>${price}</td>
+    cart_row.innerHTML = 
+    `
+        <td><img class="buy-checkout-image" src="${imageURL}"></img></td>
+        <td class="buy-checkout-model">${modelInfo}</td>
+        <td class="buy-checkout-price">€ ${price}</td>
     `
     cart.appendChild(cart_row);
+    cart.appendChild(vinDiv);
 
     }else{
         alert('Please log in first!'); //SREDITI.....
@@ -144,8 +146,7 @@ function addItemToCart(e){
 function buyACar(e){
 
     console.log(e.target.parentNode.children[1]);
-
-    let VIN = e.target.parentNode.children[1].children[1].children[2].textContent;
+    let VIN = document.getElementById('vin-num').textContent;
      //getting VIN number
 
     let carsFromLS = JSON.parse(localStorage.getItem('cars'));
@@ -159,7 +160,7 @@ function buyACar(e){
     alert('car successfully bought!');
     
     document.getElementById('carlist').style.display = 'inherit';
-    document.getElementsByClassName('carlist__heading')[0].style.display = 'inherit';
+    carlistHeading.style.display = 'inherit';
     buyCheckout.style.display='none';
     window.location.reload();
 
@@ -170,19 +171,17 @@ function buyACar(e){
 
 function deleteItem(e){
 
-
-
     let deleteVin = e.target.parentNode.parentNode.children[1].children[2].textContent; //mozda postoji laksi nacin da se do ovoga dodje
 
-    let stored_cars = JSON.parse(localStorage.getItem('cars'));
+    let storedCars = JSON.parse(localStorage.getItem('cars'));
 
-    stored_cars.forEach(( car, index ) => {
+    storedCars.forEach(( car, index ) => {
         if(car.VIN == deleteVin){
-            stored_cars.splice( index, 1 );
+            storedCars.splice( index, 1 );
         }
     });
 
-    localStorage.setItem('cars', JSON.stringify(stored_cars));
+    localStorage.setItem('cars', JSON.stringify(storedCars));
     window.location.reload();
 }
 
@@ -192,13 +191,13 @@ function moreInfo(e){
     buyCheckout.style.display="none";
     container.style.display = 'none';
     moreInfoSection.style.display = 'inherit';
-    document.getElementsByClassName('carlist__heading_and_search')[0].style.display = 'none';
+    carlistHeading.style.display = 'none';
 
-    const carDetails = document.getElementsByClassName('car__details')[0];
+    const carDetails = document.getElementsByClassName('car-details')[0];
 
-    const moreInfoWiki = document.getElementsByClassName('more__info--wiki')[0];
+    const moreInfoWiki = document.getElementsByClassName('more-info-wiki')[0];
 
-    document.getElementsByClassName('more__info--cancel')[0].addEventListener('click', funcX)
+    document.getElementsByClassName('more-info-cancel')[0].addEventListener('click', funcX)
 
 
     const carModelInfo = e.target.parentNode.parentNode.children[1].children[0].textContent;
@@ -210,14 +209,13 @@ function moreInfo(e){
             // console.log(carlist[i]);
 
             carDetails.innerHTML = `
-                <div class="car_details_image">
+                <div class="car-details-image">
                     <img src="${carlist[i].imageURL}" alt="${carlist[i].brand}${carlist[i].model}" />
                 </div>
-                <div class="car_details_text">
+                <div class="car-details-text">
                     
                     <h1>Car details</h1>
                     <br/>
-
                     <p><span class='bold'>Brand:</span> ${carlist[i].brand}</p>
                     <p><span class='bold'>Model:</span> ${carlist[i].model}</p>
                     <p><span class='bold'>Year:</span> ${carlist[i].year}</p>
@@ -243,18 +241,20 @@ function moreInfo(e){
         const article = Object.values(pages)[0];
         const imgSrc = article.thumbnail.source;
  
-        document.getElementById('more__info--spinner').style.display='none';
+        document.getElementById('more-info-spinner').style.display='none';
 
         moreInfoWiki.innerHTML = `
-        <img src="${imgSrc}"/>
+        <div class="wiki-image">
+        <img  src="${imgSrc}"/>
+        </div>
         <br/>
-        <div>
-        <p> ${article.extract.substring(0,1000)}<a href=${article.fullurl}>[read more on wikipedia..]</a></p>
+        <div class="wiki-textbox">
+        <p class="wiki-text"> ${article.extract.substring(0,1000)}...<a class="read-more" href=${article.fullurl} target="_blank">[read more on wikipedia]</a></p>
         </div>
         `;
     }).catch(err => {
-        document.getElementById('more__info--spinner').style.display='none';
-        moreInfoWiki.innerHTML = "No such car on this planet!";
+        document.getElementById('more-info-spinner').style.display='none';
+        moreInfoWiki.innerHTML = "<h1>Sorry, no wikipedia info for such car.</h1>";
     })
 
     
@@ -266,7 +266,7 @@ function funcX(){
 }
 
 
-const ApproveBuyBtns = document.getElementsByClassName('buy__approve');
+const ApproveBuyBtns = document.getElementsByClassName('buy-approve');
 for( let i = 0; i < ApproveBuyBtns.length; i++ ){
     ApproveBuyBtns[i].addEventListener('click', buyACar);
 }
@@ -275,7 +275,7 @@ for( let i = 0; i < ApproveBuyBtns.length; i++ ){
 
 // FILTERING 
 
-const searchByName = document.getElementById('search__brand')
+const searchByName = document.getElementById('search-brand')
 searchByName.addEventListener('input', filterCarsByName);
 
 function filterCarsByName(){
@@ -292,12 +292,12 @@ function filterCarsByName(){
 
 }
 
-const btnSearch = document.getElementById('search__price');
+const btnSearch = document.getElementById('search-price');
 btnSearch.addEventListener('click', filterByPrice);
 
 function filterByPrice(){
-    let lowestPrice = document.getElementById('search__price--lowest').value;
-    let highestPrice = document.getElementById('search__price--highest').value;
+    let lowestPrice = document.getElementById('search-price-lowest').value;
+    let highestPrice = document.getElementById('search-price-highest').value;
 
     // RADI ALI NE BI BILO LOSE UBACITI I SORTIRANJE PO CENI ASC I DESC...
 

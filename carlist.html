@@ -4,15 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="carlist.css" />
   </head>
   <body>
-    <div class="carlist__container">
+    <div class="carlist-container">
       <nav class="navigation">
-        <div id="logo">
+        <!-- <div id="logo">
           <a href="./index.html">Logo</a>
-        </div>
+        </div> -->
         <ul>
           <li><a href="./index.html">Home</a></li>
           <li><a href="./add_car.html">Sell car</a></li>
@@ -21,53 +22,59 @@
           <li><a href="#">Contact</a></li>
         </ul>
       </nav>
+      <div class="hamburger"></div>
+      <div class="small-nav">
+        <a href="index.html">HOME</a>
+        <a href="add_car.html">SELL CAR</a>
+        <a href="carlist.html">FIND CAR</a>
+        <a href="#">ABOUT</a>
+        <a href="#">CONTACT</a>
+      </div>
       <div id="carlist">
-        <div class="carlist__heading_and_search">
-          <div class="carlist__heading">
+        <section class="carlist-heading">
+          <div class="main-heading">
             <h1>
               Find a car for you.
             </h1>
           </div>
-          <div class="car_search">
-            <div class="form__group--price">
-              <label for="search__price--lowest">Price </label>
+          <div class="car-search">
+            <div class="form-group-price">
+              <label for="search-price-lowest">Price </label>
               <input
                 type="number"
-                name="search__price--lowest"
-                id="search__price--lowest"
+                name="search-price-lowest"
+                id="search-price-lowest"
                 placeholder="from"
               />
               <input
                 type="number"
-                name="search__price--highest"
-                id="search__price--highest"
+                name="search-price-highest"
+                id="search-price-highest"
                 placeholder="to"
               />
-              <input type="submit" id="search__price" value="Search"></input>
+              <input type="submit" id="search-price" value="Search"></input>
             </div>
-            <div class="form__group--brand">
+            <div class="form-group-brand">
               <input
                 type="text"
-                name="search__brand"
-                id="search__brand"
+                name="search-brand"
+                id="search-brand"
                 placeholder="Brand and model"
               />
             </div>
           </div>
-        </div>
-        <div class="container"></div>
+        </section>
+        <div class="sale-container"></div>
       </div>
 
       <!-- CART: -->
 
-      <div id="buy__checkout">
-        <h1>Are you sure you want to buy:</h1>
-        <table id="buy__checkout--table">
+      <div id="buy-checkout">
+        <h1 class="buy-checkout-heading">Are you sure you want to buy:</h1>
+        <table id="buy-checkout-table">
           <tr>
             <th>Photo:</th>
             <th>Car:</th>
-            <th>Year:</th>
-            <th>VIN:</th>
             <th>Price:</th>
           </tr>
           <!-- napraviti u JS: -->
@@ -79,22 +86,26 @@
             <td>WAUZZZ8P0....</td>
         </tr> -->
         </table>
-        <button class="buy__approve">Yes, buy!</button>
-        <a href="./carlist.html" clas="buy__cancel">No, cancel</a>
+        <div class="buy-checkout-buttons">
+          <button class="buy-checkout-button buy-approve">Buy</button>
+          <a href="./carlist.html" class="buy-checkout-button buy-cancel">Cancel</a>
+        </div>
+        
       </div>
 
-      <div class="more__info__section">
-        <button class="more__info--cancel">BACK</button>
-        <div class="car__details">
+      <div class="more-info-section">
+        <button class="more-info-cancel"><i class="fas fa-arrow-circle-left"></i></button>
+        <div class="car-details">
 
         </div>
-        <div class="more__info--wiki">
-          <div id="more__info--spinner"></div>
+        <div class="wiki-heading">
+          <h1>More about this car from wikipedia:</h1>
         </div>
-
-       
+        <div class="more-info-wiki">
+          <div id="more-info-spinner"></div>
+        </div>
       </div>
-
+      <script src="main.js"></script>
       <script src="carlist.js"></script>
     </div>
   </body>
