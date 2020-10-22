@@ -1,32 +1,40 @@
 
+body, html{
+    height: 100%;
+}
+
 .add-car-container{
     max-width: 120rem;
     height: 100vh;
+    margin-top: -10px;
     margin: 0 auto;
     position: relative;
     background: linear-gradient(to right ,rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%) ,url(./img/addcar.jpg) center no-repeat;
     background-size: cover; 
     background-attachment: fixed;
+    
 }
 
 .add-car-heading{
     color: white;
-    margin-top: 1rem;
+    padding-top: 1rem;
     margin-left: 2rem;
     text-align: center;
 }
 
+/* ova poruka mora skroz responivno da se uradi na 2 ekrana */
+
 .car-added{
     box-sizing: border-box;
-    width: 50rem;
-    height: 30rem;
-    background-color:rgba(255,255,255,0.3);
+    width: 40rem;
+    height: 25rem;
+    background-color:rgba(255,255,255,0.4);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 3rem;
-    padding:3rem;
+    border-radius: 1.5rem;
+    padding:3.5rem;
     opacity: 0;
 }
 .car-added h1{
@@ -37,8 +45,8 @@
 }
 
 .car-added a{
-    margin: 4rem auto;
-    border-radius: 15px;
+    margin: 3rem auto;
+    border-radius: 5px;
     width: 50%;
     height: 20%;
     display: flex;
@@ -72,6 +80,7 @@
     margin-left: 10%;
 }
 
+
 #submit{
     margin-left: 10%;
     border: none;
@@ -92,7 +101,9 @@
     left: 5%;
     color: white;
     font-weight: bold;
+    
 }
+
 
 #login-prompt a {
     text-decoration: none;
@@ -123,4 +134,93 @@
 @keyframes appear {
     0%{ opacity: 0;}
     100%{opacity: 1;}
+}
+
+
+
+@media only screen and (max-width:992px){
+
+    .add-car-container{
+        height: 130vh;
+    }
+
+    #add-car-form{
+        width: 50%;
+        background-color: rgba(255,255,255,0.4);
+        border-radius: .5rem;
+        color: white;
+        position: absolute;
+        left: 2%;
+        top: 12rem;
+    }
+
+}
+
+@media only screen and (max-width:768px){
+
+    #add-car-form{
+        width: 70%;
+        background-color: rgba(255,255,255,0.4);
+        border-radius: .5rem;
+        color: white;
+        position: absolute;
+        left: 15%;
+        top: 12rem;
+    }
+
+
+}
+
+@media only screen and (max-width:576px){
+
+    .add-car-container{
+        padding-top: 2.5rem;
+    }
+
+    #add-car-form{
+        width: 80%;
+        background-color: rgba(255,255,255,0.4);
+        border-radius: .5rem;
+        color: white;
+        position: absolute;
+        left: 10%;
+        top: 8rem;
+    }
+
+    .add-car-heading{
+        text-align: start;
+        margin-left: 10%;
+    }
+
+    .car-added{
+        box-sizing: border-box;
+        width: 35rem;
+        height: 22rem;
+        background-color:rgba(255,255,255,0.4);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 1.5rem;
+        padding:3.5rem;
+        opacity: 0;
+    }
+
+    .car-added h1{
+        font-size: 3.5rem;
+    }
+
+    .car-added a{
+        border-radius: 5px;
+        width: 50%;
+        height: 20%;
+        display: flex;
+        font-size: 3rem;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        color: black;
+        font-weight: bold;
+    }
+
 }

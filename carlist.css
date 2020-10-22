@@ -37,15 +37,30 @@
 
 }
 
-.form-group-brand input{
 
-    width: 35rem;
+.form-group-brand{
+    position: relative;
+}
+
+
+
+.form-group-brand input{
+    width: 30rem;
     height: 4rem;
     margin-right: 1.5rem;
     border-radius: 5rem;
     border: none;
-    padding: 0 1rem;
+    padding-right: 4rem;
+    padding-left: 4rem;
     font-size: 1.92rem;
+}
+
+.form-group-brand i{
+    position: absolute;
+    right: 3.5rem;
+    top: 1.1rem;
+    font-size: 2rem;
+    color: #383838;
 }
 
 .form-group-price{
@@ -54,7 +69,7 @@
 }
 
 .form-group-price input{
-    width: 15rem;
+    width: 13rem;
     height: 4rem;
     margin-right: 1.5rem;
     border-radius: 5rem;
@@ -64,8 +79,15 @@
 }
 
 .form-group-price input[type="submit"]{
+    width: 10rem;
+}
+.form-group-price input:focus{
+    border: none;
+}
+
+.form-group-price input[type="submit"]{
     color: white;
-    background-color: red;
+    background-color: rgb(231, 75, 48);
 }
 
 
@@ -159,14 +181,16 @@
     position: relative;
 }
 
-.more-info-cancel i{
+.more-info-cancel{
     position: absolute;
+    background-color: transparent;
     top: 2rem;
     left: 1rem;
     font-size: 5rem;
     cursor: pointer;
     font-weight: bold;
     border: none;
+    overflow: hidden;
 }
 
 
@@ -217,6 +241,9 @@
 .wiki-image{
     width: 40%;
     margin: 3rem auto;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 .wiki-image img{
@@ -306,19 +333,75 @@
     cursor: pointer;
 }
 
-.buy-cancel{
-
-}
-
 @media only screen and (max-width:992px){
+
+    .car-search{
+        /* padding-top: 2rem;
+        padding-bottom: 2rem;
+        margin: auto;
+        background-color: #dfdfdf; */
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+    
+    }
+
+    .form-group-price{
+        align-self: flex-start;
+        margin-top: 2rem;
+        padding-left: 1.5rem;
+    }
+
+    .form-group-price input{
+        width: 9rem;
+        height: 3.5rem;
+        margin-right: 1.5rem;
+        border-radius: 5rem;
+        border: none;
+        padding: 0 1.5rem;
+        font-size: 1.72rem;
+    }
 
     .sale-container{
         width: 90%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        max-width: 110rem;
-        margin: 2rem auto;
+    }
+
+    .car-details{
+        height: 30rem;        
+    }
+
+    .car-details-text > p{
+        font-size: 1.8rem;
+    }
+
+    .car-details-big{
+        font-size: 2.5rem;
+    }
+
+    .wiki-image{
+        width: 50%;
+        margin: 3rem auto;
+    }
+
+    #buy-checkout-table{
+        font-size: 2rem;
+        margin: 5rem;
+    }
+
+    .buy-checkout-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 19rem;
+        height: 4.5rem;
+        font-size: 2.7rem;
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(0,0,0,0.35);
+        text-transform: none;
+        cursor: pointer;
     }
 
 }
@@ -327,24 +410,67 @@
 
     .sale-container{
         width: 95%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        max-width: 110rem;
-        margin: 2rem auto;
     }
+
+    
+.car-details{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.car-details-image{
+    width: 80%;
+    align-self: center;
+
+}
+
+.car-details-text{
+    width: 70%;
+}
+
+.wiki-image{
+    width: 60%;
+    margin: 3rem auto;
+}
 
 }
 
 @media only screen and (max-width:576px){
 
+    .form-group-price input{
+        width: 7rem;
+        height: 3.5rem;
+        margin-right: 1.5rem;
+        border-radius: 5rem;
+        border: none;
+        padding: 0 1rem;
+        font-size: 1.60rem;
+    }
+
+
     .sale-container{
-        width: 70%;
-        display: grid;
+        width: 80%;
         grid-template-columns: 1fr;
-        gap: 2rem;
-        max-width: 110rem;
-        margin: 2rem auto;
+    }
+
+    .car-details-image{
+        width: 100%;
+        padding-left: 0;
+        margin-top: 5rem;
+    }
+
+    .car-details-image img{
+        width: 100%;
+    }
+
+    .wiki-image{
+        width: 70%;
+        margin: 3rem auto;
     }
 
 }
+
+
+
+/* OSTALO JE ODRADITI TABELU DO 576px */

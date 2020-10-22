@@ -9,35 +9,29 @@
     <link rel="stylesheet" href="addcar.css" />
   </head>
   <body>
+    <div class="hamburger-btn">
+      <span class="hamburger-inside"></span>
+    </div>
+    <nav class="small-nav">
+      <ul class='small-nav-menu'>
+        <li class="small-nav-item"><a class="small-nav-link" href="index.html">HOME</a></li>
+        <li class="small-nav-item"><a class="small-nav-link" href="add_car.html">SELL CAR</a></li>
+        <li class="small-nav-item"><a class="small-nav-link" href="carlist.html">FIND CAR</a></li>
+        <li class="small-nav-item"><a class="small-nav-link" href="#">ABOUT</a></li>
+        <li class="small-nav-item"><a class="small-nav-link" href="#">CONTACT</a></li>
+      </ul>
+    </nav>
     <div class="add-car-container">
       <nav class="navigation">
-        <!-- <div id="logo">
-          <a href="./index.html">
-            <div class="logo">
-              <img src="./img/logobmw1.png" alt="logo">
-            </div>
-          </a>
-        </div> -->
         <ul>
           <li><a href="./index.html">Home</a></li>
           <li><a class="active" href="./add_car.html">Sell car</a></li>
           <li><a href="./carlist.html">Find car</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="./index.html#about">About us</a></li>
+          <li><a href="./index.html#footer">Contact</a></li>
         </ul>
       </nav>
-      <div class="hamburger"></div>
-      <div class="small-nav">
-        <a href="./index.html">HOME</a>
-        <a href="carlist.html">SELL CAR</a>
-        <a href="./carlist.html">FIND CAR</a>
-        <a href="#">ABOUT</a>
-        <a href="#">CONTACT</a>
-      </div>
-      <!-- fali form -->
-
       <h1 class="add-car-heading">Put your car on sale.</h1>
-
       <div class="car-added">
         <h1>
           Car successfully <br />
@@ -96,8 +90,8 @@
         <div class="line"></div>
       </div>
 
-      <script src="main.js"></script>
-      <script src="addCar.js"></script>
+      <script src="main.js" async></script>
+      <script src="addCar.js" async></script>
     </div>
   </body>
 </html>

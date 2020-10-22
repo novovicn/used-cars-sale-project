@@ -12,6 +12,11 @@ const carAddedAlert = document.getElementsByClassName('car-added')[0];
 
 const errorMessages = document.getElementById("car-form-errors");
 
+
+const hamburgerBtnSellCar = document.getElementsByClassName('hamburger-btn')[0];
+
+
+
 console.log(errorMessages);
 
 
@@ -29,14 +34,20 @@ window.onload = function(){
             }else{
                 carForm.style.display="none";
                 loginPrompt.style.display="inherit";
+                carFromHeading.style.display = 'none';
             }
         }else{
                 carForm.style.display="none";
                 loginPrompt.style.display="inherit";
+                carFromHeading.style.display = 'none';
         }
     }
 
 function addCartoLS(e){
+
+    
+
+    errorMessages.innerHTML = '';
 
     e.preventDefault();
 

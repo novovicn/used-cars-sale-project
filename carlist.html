@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="carlist.css" />
   </head>
   <body>
+    <div class="hamburger-btn">
+      <span class="hamburger-inside"></span>
+    </div>
+    <nav class="small-nav">
+      <ul class='small-nav-menu'>
+        <li class="small-nav-item"><a class="small-nav-link" href="index.html">HOME</a></li>
+        <li class="small-nav-item"><a class="small-nav-link" href="add_car.html">SELL CAR</a></li>
+        <li class="small-nav-item"><a class="small-nav-link" href="carlist.html">FIND CAR</a></li>
+        <li class="small-nav-item"><a class="small-nav-link" href="#">ABOUT</a></li>
+        <li class="small-nav-item"><a class="small-nav-link" href="#">CONTACT</a></li>
+      </ul>
+    </nav>
     <div class="carlist-container">
       <nav class="navigation">
         <!-- <div id="logo">
@@ -18,18 +30,10 @@
           <li><a href="./index.html">Home</a></li>
           <li><a href="./add_car.html">Sell car</a></li>
           <li><a class="active" href="./carlist.html">Find car</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="./index.html#about">About us</a></li>
+          <li><a href="./index.html#footer">Contact</a></li>
         </ul>
       </nav>
-      <div class="hamburger"></div>
-      <div class="small-nav">
-        <a href="index.html">HOME</a>
-        <a href="add_car.html">SELL CAR</a>
-        <a href="carlist.html">FIND CAR</a>
-        <a href="#">ABOUT</a>
-        <a href="#">CONTACT</a>
-      </div>
       <div id="carlist">
         <section class="carlist-heading">
           <div class="main-heading">
@@ -61,6 +65,7 @@
                 id="search-brand"
                 placeholder="Brand and model"
               />
+              <i class="fas fa-search"></i>
             </div>
           </div>
         </section>
@@ -99,7 +104,7 @@
 
         </div>
         <div class="wiki-heading">
-          <h1>More about this car from wikipedia:</h1>
+          <h1 class="car-details-big">More about this car from wikipedia:</h1>
         </div>
         <div class="more-info-wiki">
           <div id="more-info-spinner"></div>

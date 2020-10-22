@@ -4,18 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Final project</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="hamburger-btn">
+      <span class="hamburger-inside hamburger-inside-main"></span>
+    </div>
+    <nav class="small-nav">
+      <ul class="small-nav-menu">
+        <li class="small-nav-item">
+          <a class="small-nav-link" href="index.html">HOME</a>
+        </li>
+        <li class="small-nav-item">
+          <a class="small-nav-link" href="add_car.html">SELL CAR</a>
+        </li>
+        <li class="small-nav-item">
+          <a class="small-nav-link" href="carlist.html">FIND CAR</a>
+        </li>
+        <li class="small-nav-item">
+          <a class="small-nav-link" href="#">ABOUT</a>
+        </li>
+        <li class="small-nav-item">
+          <a class="small-nav-link" href="#">CONTACT</a>
+        </li>
+      </ul>
+    </nav>
     <div class="main-container">
       <!-- AUTHENTIFICATION  -->
       <div class="auth-nav">
         <a href="#">
-        <div class="logo">
-          <img src="./img/logobmw1.png" alt="logo">
-          <!-- <p>CAR MARKET</p> -->
-        </div>
-      </a>
+          <div class="logo">
+            <img src="./img/logobmw1.png" alt="logo" />
+            <!-- <p>CAR MARKET</p> -->
+          </div>
+        </a>
         <div class="authentification-buttons">
           <button class="login-btn">LOGIN</button>
           <button class="register-btn">REGISTER</button>
@@ -27,19 +50,10 @@
           <li><a class="active" href="./index.html">Home</a></li>
           <li><a href="./add_car.html">Sell car</a></li>
           <li><a href="./carlist.html">Find car</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#footer">Contact</a></li>
         </ul>
       </nav>
-      <div class="hamburger"></div>
-      <div class="small-nav">
-        <a href="index.html">HOME</a>
-        <a href="add_car.html">SELL CAR</a>
-        <a href="carlist.html">FIND CAR</a>
-        <a href="#">ABOUT</a>
-        <a href="#">CONTACT</a>
-      </div>
-
       <div id="user-authentification">
         <!-- User registration form -->
         <form id="user-registration">
@@ -126,67 +140,80 @@
           </div>
         </form>
       </div>
-
-      <div id="main-image">
-        <h1>Welcome to car shop.</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae maxime
-          harum provident quis iste temporibus mollitia. Vel, sed! Quia
-          repudiandae nisi id dolorem qui iure. Repudiandae quia id modi
-          officia!
-        </p>
+      <div class="darken-hidden"></div>
+        <div class="main-page-content">
+          <div id="main-image">
+            <div id="main-image-content">
+              <h1>Welcome to car shop.</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
+                maxime harum provident quis iste temporibus mollitia.
+              </p>
+              <div class="line"></div>
+              <a href="./carlist.html">EXPLORE</a>
+            </div>
+          </div>
+  
+          <section id="car-news">
+            <div class="text-content">
+              <h1 id="car-news-heading">Latest News</h1>
+              <h1 id="car-news-heading2">
+                ARE DIESEL ENGINES GOING TO BE BANNED?
+              </h1>
+              <div class="line line-black"></div>
+              <p id="car-news-text">
+                Full electrification powered by renewable sources is a long way
+                from mainstream adoption, but diesel continues to represent a
+                viable option for drivers now and in the future. We show you why.
+              </p>
+              <a href="https://dieselinformation.aecc.eu/are-diesel-engines-going-to-be-banned/" target="_blank" class="read-more-news">Read more</a>
+            </div>
+            <div class="image">
+              <img src="./img/car-news.jpg" alt="" />
+            </div>
+          </section>
+  
+          <section id="about">
+            <div class="about-image">
+  
+            </div>
+            <div class="about-text">
+              <h1 class="about-heading">About</h1>
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Consequatur eligendi corrupti enim delectus doloribus, repudiandae
+                earum libero blanditiis, veniam perspiciatis ipsa non aut et
+                accusantium totam? Minus laboriosam eveniet deserunt! 
+              </p>
+            </div>
+          </section>
+  
+          <section id="contact">
+            <div class="contact-text">
+  
+            </div>
+            <div class="contact-image">
+  
+            </div>
+          </section>
+  
+          <footer id="footer">
+            <div class="contact">
+              <ul>
+                <li><a href=""><i class="fas fa-phone"></i> +381605559659</a></li>
+                <li><a href=""><i class="fas fa-envelope"></i> novovicnenad96@gmail.com</a></li>
+                <li><a href=""><i class="fab fa-linkedin"></i> Nenad Novovic</a></li>
+              </ul>
+            </div>
+            <h4>&copy; Corpyright Nenad Novovic 2020</h4>
+            <div class="right">
+                <p>Some content needed here fasho</p>
+            </div>
+          </footer>
+        </div>
       </div>
+      
 
-      <section id="car-news">
-        <div class="container">
-          <div class="text-content">
-            <h1 id="car-news-heading">We create and turn into reality</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
-              optio eius ipsam, perferendis alias dignissimos quia assumenda
-              repellendus nihil nobis incidunt id. Itaque quam eaque error
-              explicabo omnis harum optio.
-            </p>
-          </div>
-          <div class="image">
-            <img src="./img/news.jpg" alt="" />
-          </div>
-        </div>
-      </section>
-      <section id="about">
-        <div class="container about-container">
-          <h1 class="about-heading">About</h1>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Consequatur eligendi corrupti enim delectus doloribus, repudiandae
-            earum libero blanditiis, veniam perspiciatis ipsa non aut et
-            accusantium totam? Minus laboriosam eveniet deserunt! Ipsum ea
-            adipisci illo officia laborum tempora, rem, sed harum, vero veniam
-            sint ipsam suscipit pariatur vel eligendi facere. Quis et autem,
-            cupiditate fugiat itaque sed animi similique magnam numquam.
-            Voluptatum quae odit culpa aliquam facilis vero, illum, assumenda
-            temporibus consequatur minima mollitia accusantium. Impedit iusto
-            quibusdam corporis exercitationem modi sit dolor, a illo distinctio
-            consequatur, itaque deserunt debitis cupiditate! Cum nesciunt
-            adipisci quasi iure quos, ad illum beatae doloribus sequi quidem
-            consequuntur libero blanditiis ea doloremque, eveniet saepe
-            reiciendis impedit iusto vitae quam. Amet obcaecati sequi sit ea
-            exercitationem. Sequi recusandae odit cupiditate non asperiores
-            sunt, quasi optio praesentium, ad ex ducimus, vel perferendis
-            corporis pariatur iste magnam illum reprehenderit blanditiis
-            voluptatem quisquam unde autem fugiat. Aut, voluptas ipsum!Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Voluptas nihil
-            neque tempora sit unde repellat sunt obcaecati quae. Similique
-            fugiat vel provident accusamus cupiditate possimus doloribus sint
-            necessitatibus, consequatur molestiae.
-          </p>
-        </div>
-      </section>
-
-      <footer id="footer">
-        <h4>&copy; Corpyright Nenad Novovic 2020</h4>
-      </footer>
-    </div>
     <script src="main.js"></script>
     <script src="auth.js"></script>
   </body>

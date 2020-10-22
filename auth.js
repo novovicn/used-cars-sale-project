@@ -8,6 +8,8 @@ koja ga boji kada se ustanovi greska na njemu...
 
 */
 
+const mainContainer = document.querySelector('.main-container');
+const darkenDiv = document.getElementsByClassName('darken-hidden')[0];
 const registerSubmit = document.getElementById('submit-reg');
 const loginSubmit = document.getElementById('submit-login');
 const registrationForm = document.getElementById('user-registration');
@@ -18,11 +20,16 @@ const logoutButton = document.getElementsByClassName('logout-btn')[0];
 const loginButton = document.getElementsByClassName('login-btn')[0];
 const registerButton = document.getElementsByClassName('register-btn')[0];
 
+const mainPageContent = document.getElementsByClassName('main-page-content')[0];
+
 logoutButton.style.display = 'none';
+
+
 
 window.onload = () => {
     registrationForm.style.display = 'none';
     loginForm.style.display = 'none';
+
 }
 
 let users = [];
@@ -30,14 +37,14 @@ var loggedUser = {};
 
 
 loginButton.addEventListener('click', () => {
-    console.log('clicked');
     registrationForm.style.display = 'none';
     loginForm.style.display = 'block';
+    darkenDiv.classList.add('darken-visible');
 });
 registerButton.addEventListener('click', () => {
-    console.log('clicked');
     registrationForm.style.display = 'block';
     loginForm.style.display = 'none';
+    darkenDiv.classList.add('darken-visible');
 })
 
 registrationForm.onsubmit = registerUser;
@@ -161,8 +168,6 @@ function registerUser(e){
 
 function logUserIn(e){
     e.preventDefault(); 
-
-
     let registeredUsers = retrieveUsersLS();
     // console.log(registeredUsers.length);
 
@@ -242,6 +247,7 @@ for(let i = 0; i< cancelBtns.length; i++){
     cancelBtns[i].addEventListener('click', (e) =>{
         e.preventDefault();
         registrationForm.style.display = 'none';
+        darkenDiv.classList.remove('darken-visible');
         loginForm.style.display = 'none';
     })
 }

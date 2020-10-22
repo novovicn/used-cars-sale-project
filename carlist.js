@@ -12,6 +12,8 @@ const carlistHeading = document.getElementsByClassName('carlist-heading')[0];
 
 
 
+
+
 window.onload = () => {
     buyCheckout.style.display = 'none';
     moreInfoSection.style.display = 'none';
@@ -80,7 +82,6 @@ async function renderElements(elements){
         
 }
 
-
 function addListeners(){
     let buyButtons = document.getElementsByClassName('buy-car');
     let deleteButtons = document.getElementsByClassName('delete-car');
@@ -101,6 +102,8 @@ function addListeners(){
 }
 
 function addItemToCart(e){
+
+    console.log(e);
     if(currentUser){
         document.getElementById('carlist').style.display = 'none';
     carlistHeading.style.display = 'none';
@@ -171,18 +174,28 @@ function buyACar(e){
 
 function deleteItem(e){
 
+
     let deleteVin = e.target.parentNode.parentNode.children[1].children[2].textContent; //mozda postoji laksi nacin da se do ovoga dodje
 
     let storedCars = JSON.parse(localStorage.getItem('cars'));
 
-    storedCars.forEach(( car, index ) => {
-        if(car.VIN == deleteVin){
-            storedCars.splice( index, 1 );
-        }
-    });
+    let ask = window.confirm(
+        `Are you sure you want to delete?`
+      );
+      if (ask === false) {
+        return false;
+      } else {
+        storedCars.forEach(( car, index ) => {
+            if(car.VIN == deleteVin){
+                storedCars.splice( index, 1 );
+            }
+        });
+    
+        localStorage.setItem('cars', JSON.stringify(storedCars));
+        window.location.reload();
+    
+    }
 
-    localStorage.setItem('cars', JSON.stringify(storedCars));
-    window.location.reload();
 }
 
 
@@ -213,8 +226,7 @@ function moreInfo(e){
                     <img src="${carlist[i].imageURL}" alt="${carlist[i].brand}${carlist[i].model}" />
                 </div>
                 <div class="car-details-text">
-                    
-                    <h1>Car details</h1>
+                    <h1 class="car-details-big">Car details</h1>
                     <br/>
                     <p><span class='bold'>Brand:</span> ${carlist[i].brand}</p>
                     <p><span class='bold'>Model:</span> ${carlist[i].model}</p>
@@ -222,7 +234,7 @@ function moreInfo(e){
                     <p><span class='bold'>Owner:</span> ${carlist[i].owner}</p>
                     <p><span class='bold'>Mileage:</span> ${carlist[i].mileage}</p>
                     <p><span class='bold'>VIN:</span> ${carlist[i].VIN}</p>
-                    <h1><span class='bold'>Price:</span> ${carlist[i].price} €</h1>
+                    <h1 class="car-details-big" ><span class='bold'>Price:</span> ${carlist[i].price} €</h1>
                 </div>
             `
 
@@ -254,7 +266,7 @@ function moreInfo(e){
         `;
     }).catch(err => {
         document.getElementById('more-info-spinner').style.display='none';
-        moreInfoWiki.innerHTML = "<h1>Sorry, no wikipedia info for such car.</h1>";
+        moreInfoWiki.innerHTML = "<h1 class='car-details-big'>Sorry, no wikipedia info for such car.</h1>";
     })
 
     
