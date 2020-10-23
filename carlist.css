@@ -286,11 +286,47 @@
 
 #buy-checkout{
     height: 100vh;
+    padding-top: 3rem;
+    width: 80%;
+    margin: 0 auto;
+}
+.first-row{
+
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    font-weight: bold;
+    padding: 0 5rem;
+}
+
+.first-row > div{
+    width: 33%;
+    text-align: center;
+
+}
+
+.second-row{
+    padding-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.second-row > div{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
+.buy-checkout-image img{
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.35);
+}
+
 .buy-checkout-heading{
-    margin-top: 2rem;
     text-align: center;
 }
 
@@ -299,18 +335,6 @@
     margin: 10rem;
 }
 
-#buy-checkout-table td{
-    width: 30%;
-    text-align: center;
-    padding:3rem;
-}
-
-
-#buy-checkout-table td img{
-    width: 100%;
-    border-radius: 5px;
-    box-shadow: 3px 3px 10px rgba(0,0,0,0.35);
-}
 
 .buy-checkout-buttons{
     display: flex;
@@ -331,6 +355,16 @@
     background-color: rgba(0,0,0,0.35);
     text-transform: none;
     cursor: pointer;
+}
+
+.buy-cancel{
+    background-color:rgba(206, 76, 76);
+    color: white;
+}
+
+.buy-approve{
+    background-color: rgb(88, 106, 206);
+    color: white;
 }
 
 @media only screen and (max-width:992px){
@@ -399,9 +433,14 @@
         font-size: 2.7rem;
         border-radius: 10px;
         border: none;
-        background-color: rgba(0,0,0,0.35);
         text-transform: none;
         cursor: pointer;
+    }
+
+    #buy-checkout{
+        height: 100vh;
+        width: 90%;
+        margin: 0 auto;
     }
 
 }
@@ -434,6 +473,12 @@
     margin: 3rem auto;
 }
 
+#buy-checkout{
+    height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+}
+
 }
 
 @media only screen and (max-width:576px){
@@ -446,6 +491,16 @@
         border: none;
         padding: 0 1rem;
         font-size: 1.60rem;
+    }
+
+    #buy-checkout{
+        height: auto;
+    }
+
+    .buy-checkout-heading{
+        font-size: 2.5rem;
+        width: 70%;
+        margin: 0 auto;
     }
 
 
@@ -469,6 +524,32 @@
         margin: 3rem auto;
     }
 
+    .first-row{
+        display: none;
+    }
+
+    .second-row{
+        flex-flow: column;
+        width: 80%;
+    }
+
+    .second-row > div{
+        width: 100%;
+        margin-bottom: 5rem;
+        font-size: 3rem;
+    }
+
+    .buy-checkout-buttons{
+        display: flex;
+        flex-flow: column;
+    }
+
+    .buy-checkout-button{
+        width: 80%;
+        margin: 1rem auto;
+    }
+
+  
 }
 
 

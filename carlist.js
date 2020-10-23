@@ -128,19 +128,20 @@ function addItemToCart(e){
 
     cart.style.display = 'inherit';
     
-    let cart_row = document.createElement('tr');
+    let cart_row = document.createElement('div');
+    cart_row.setAttribute('class', 'second-row');
 
     cart_row.innerHTML = 
     `
-        <td><img class="buy-checkout-image" src="${imageURL}"></img></td>
-        <td class="buy-checkout-model">${modelInfo}</td>
-        <td class="buy-checkout-price">€ ${price}</td>
+        <div class="buy-checkout-image" ><img src="${imageURL}"></img></div>
+        <div class="buy-checkout-model">${modelInfo}</div>
+        <div class="buy-checkout-price">€ ${price}</div>
     `
     cart.appendChild(cart_row);
     cart.appendChild(vinDiv);
 
     }else{
-        alert('Please log in first!'); //SREDITI.....
+        alert('Please log in first!');
     }
 
     

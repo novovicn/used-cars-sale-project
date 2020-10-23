@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Final project</title>
+    <title>CAR SHOP</title>
+    <link rel="shortcut icon" href="img/logobmw1.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -14,7 +15,7 @@
     <nav class="small-nav">
       <ul class="small-nav-menu">
         <li class="small-nav-item">
-          <a class="small-nav-link" href="index.html">HOME</a>
+          <a id="active" class="small-nav-link" href="index.html">HOME</a>
         </li>
         <li class="small-nav-item">
           <a class="small-nav-link" href="add_car.html">SELL CAR</a>
@@ -23,10 +24,10 @@
           <a class="small-nav-link" href="carlist.html">FIND CAR</a>
         </li>
         <li class="small-nav-item">
-          <a class="small-nav-link" href="#">ABOUT</a>
+          <a class="small-nav-link" href="./index.html#about">ABOUT</a>
         </li>
         <li class="small-nav-item">
-          <a class="small-nav-link" href="#">CONTACT</a>
+          <a class="small-nav-link" href="./index.html#contact">CONTACT</a>
         </li>
       </ul>
     </nav>
@@ -47,11 +48,11 @@
       </div>
       <nav class="navigation">
         <ul>
-          <li><a class="active" href="./index.html">Home</a></li>
+          <li><a id="active" href="./index.html">Home</a></li>
           <li><a href="./add_car.html">Sell car</a></li>
           <li><a href="./carlist.html">Find car</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#footer">Contact</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
       <div id="user-authentification">
@@ -146,8 +147,7 @@
             <div id="main-image-content">
               <h1>Welcome to car shop.</h1>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
-                maxime harum provident quis iste temporibus mollitia.
+                For fantastic offers and great choice, our site is your number one second hand car shop.
               </p>
               <div class="line"></div>
               <a href="./carlist.html">EXPLORE</a>
@@ -180,35 +180,27 @@
             <div class="about-text">
               <h1 class="about-heading">About</h1>
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Consequatur eligendi corrupti enim delectus doloribus, repudiandae
-                earum libero blanditiis, veniam perspiciatis ipsa non aut et
-                accusantium totam? Minus laboriosam eveniet deserunt! 
+                Hi! We are situated in Belgrade, Serbia. This is the site where you
+                come to either sell your car, or buy it from other users.
+
               </p>
             </div>
           </section>
   
           <section id="contact">
+            <div class="contact-heading">
+              CONTACT
+            </div>
             <div class="contact-text">
-  
-            </div>
-            <div class="contact-image">
-  
-            </div>
-          </section>
-  
-          <footer id="footer">
-            <div class="contact">
               <ul>
                 <li><a href=""><i class="fas fa-phone"></i> +381605559659</a></li>
                 <li><a href=""><i class="fas fa-envelope"></i> novovicnenad96@gmail.com</a></li>
                 <li><a href=""><i class="fab fa-linkedin"></i> Nenad Novovic</a></li>
               </ul>
             </div>
+          </section>
+          <footer id="footer">
             <h4>&copy; Corpyright Nenad Novovic 2020</h4>
-            <div class="right">
-                <p>Some content needed here fasho</p>
-            </div>
           </footer>
         </div>
       </div>

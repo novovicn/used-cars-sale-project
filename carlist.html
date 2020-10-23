@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>CAR SHOP</title>
+    <link rel="shortcut icon" href="img/logobmw1.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="carlist.css" />
@@ -16,9 +17,13 @@
       <ul class='small-nav-menu'>
         <li class="small-nav-item"><a class="small-nav-link" href="index.html">HOME</a></li>
         <li class="small-nav-item"><a class="small-nav-link" href="add_car.html">SELL CAR</a></li>
-        <li class="small-nav-item"><a class="small-nav-link" href="carlist.html">FIND CAR</a></li>
-        <li class="small-nav-item"><a class="small-nav-link" href="#">ABOUT</a></li>
-        <li class="small-nav-item"><a class="small-nav-link" href="#">CONTACT</a></li>
+        <li class="small-nav-item"><a id="active" class="small-nav-link" href="carlist.html">FIND CAR</a></li>
+        <li class="small-nav-item">
+          <a class="small-nav-link" href="./index.html#about">ABOUT</a>
+        </li>
+        <li class="small-nav-item">
+          <a class="small-nav-link" href="./index.html#contact">CONTACT</a>
+        </li>
       </ul>
     </nav>
     <div class="carlist-container">
@@ -29,9 +34,9 @@
         <ul>
           <li><a href="./index.html">Home</a></li>
           <li><a href="./add_car.html">Sell car</a></li>
-          <li><a class="active" href="./carlist.html">Find car</a></li>
+          <li><a id="active" class="active" href="./carlist.html">Find car</a></li>
           <li><a href="./index.html#about">About us</a></li>
-          <li><a href="./index.html#footer">Contact</a></li>
+          <li><a href="./index.html#contact">Contact</a></li>
         </ul>
       </nav>
       <div id="carlist">
@@ -76,12 +81,13 @@
 
       <div id="buy-checkout">
         <h1 class="buy-checkout-heading">Are you sure you want to buy:</h1>
-        <table id="buy-checkout-table">
-          <tr>
-            <th>Photo:</th>
-            <th>Car:</th>
-            <th>Price:</th>
-          </tr>
+        <div id="buy-checkout-table">
+          <div class="first-row">
+            <div>Photo:</div>
+            <div>Car:</div>
+            <div>Price:</div>
+          </div>
+            
           <!-- napraviti u JS: -->
           <!-- <tr>
             <td><img src="" alt=""></img></td>
@@ -90,7 +96,7 @@
             <td>228656</td>
             <td>WAUZZZ8P0....</td>
         </tr> -->
-        </table>
+      </div>
         <div class="buy-checkout-buttons">
           <button class="buy-checkout-button buy-approve">Buy</button>
           <a href="./carlist.html" class="buy-checkout-button buy-cancel">Cancel</a>
