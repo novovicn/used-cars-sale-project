@@ -1,0 +1,8 @@
+This is my final exam for the "Front-end developer course".
+This web application is a place where users come to either sell their used car,or buy car from other users. It has three pages.
+The first page is index page with user authentification, about and contact sections. 
+User authentification information is stored in local and session storage because this is a front-end app exam. 
+The second page is where you add your car for sale. You must be logged in to put your car on sale (to see this page's content). There is a form for you to add your car, and if your data passes a validation, a pop-up window informs you that your car is added, and there is a confirm button that brings you to the third page which shows cars that are on sale, with your car just added. 
+Cars are showed "newest-first", there are two filtering options,first is search by brand or model, which works on every keystroke. The second is search by price where you can enter min price and max price, or just one of them.Every car "card" has an image, main information, and two buttons. 
+The first button is a more-info button which leads you to a page where you see more info about your carplus fetched info about that model from wikipedia(with a link to read more about it on the wikipedia page). 
+The other button is a buy/delete button(conditional rendering). In case you added the car, therewill be delete button so you can delete your car from site. In case the car is added byother user, at that place there is a 'buy' button which leads you to buy checkout page.There you need to confirm your purchase for the certain car. After car is bought it remains on the 'cars-on-sale' page, but its status(image) changes to "SOLD".
