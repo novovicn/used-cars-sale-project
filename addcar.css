@@ -127,8 +127,8 @@ body, html{
 }
 
 @keyframes vanish {
-    0%{ opacity: 1;}
-    100%{opacity: 0;}
+    0%{ opacity: 1; transform: translateX(0);}
+    100%{opacity: 0; transform: translateX(-100%);}
 }
 
 @keyframes appear {
@@ -207,15 +207,15 @@ body, html{
     }
 
     .car-added h1{
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
 
     .car-added a{
-        border-radius: 5px;
+        border-radius: 3px;
         width: 50%;
         height: 20%;
         display: flex;
-        font-size: 3rem;
+        font-size: 2rem;
         justify-content: center;
         align-items: center;
         background-color: white;
