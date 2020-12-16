@@ -285,7 +285,7 @@ ul {
   width: 20%;
   background: none;
   font-size: 24px;
-  color: red;
+  color: darkred;
 }
 
 #main-image {
@@ -704,6 +704,10 @@ ul {
     background-color: rgba(255, 255, 255, 0.8);
   }
 
+  #user-registration-heading{
+    font-size: 2.5rem;
+  }
+
   #main-image-content {
     position: absolute;
     top: 10%;
@@ -767,6 +771,10 @@ ul {
 
   #about .about-text{
       width: 100%;
+  }
+
+  .contact-text a{
+    font-size: 1.55rem;
   }
 
 
