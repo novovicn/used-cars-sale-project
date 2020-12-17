@@ -116,6 +116,30 @@
           <div id="more-info-spinner"></div>
         </div>
       </div>
+      <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+      
+      <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+          apiKey: "AIzaSyBJIQ3yDWtUiZ2bFswjHvBE4rcv3gfTNuQ",
+          authDomain: "used-cars-sale.firebaseapp.com",
+          projectId: "used-cars-sale",
+          storageBucket: "used-cars-sale.appspot.com",
+          messagingSenderId: "597710265366",
+          appId: "1:597710265366:web:4bdae0a48c9b712a6ee937",
+          measurementId: "G-M5DBF5695R"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const db = firebase.firestore();
+        
+      </script>
+      
+      
       <script src="main.js"></script>
       <script src="carlist.js"></script>
     </div>
