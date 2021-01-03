@@ -2,6 +2,23 @@
     display: none;
 }
 
+
+.is-sold{
+    width: 50%;
+    height: 9%;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    top:10px;
+    left:-35px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-30deg);
+
+}
+
 .bold{
     font-weight: bold;
 }

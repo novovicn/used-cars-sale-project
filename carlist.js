@@ -3,6 +3,21 @@ const buyCheckout = document.getElementById("buy-checkout");
 const moreInfoSection = document.getElementsByClassName("more-info-section")[0];
 const carlistHeading = document.getElementsByClassName("carlist-heading")[0];
 
+function retrieveCars() {
+  return new Promise((resolve, reject) => {
+    db.collection("cars")
+      .get()
+      .then((snapshot) => {
+        let carsArray = [];
+        console.log(snapshot.docs);
+        snapshot.docs.forEach((doc) => carsArray.push(doc.data()));
+        console.log(carsArray);
+        resolve(carsArray);
+      })
+      .catch((err) => console.log(err));
+  });
+}
+
 window.onload = () => {
   buyCheckout.style.display = "none";
   moreInfoSection.style.display = "none";
@@ -19,20 +34,7 @@ window.onload = () => {
     });
 };
 
-function retrieveCarsFromDatabase() {
-  return new Promise((resolve, reject) => {
-    db.collection("cars")
-      .get()
-      .then((snapshot) => {
-        let carsArray = [];
-        console.log(snapshot.docs);
-        snapshot.docs.forEach((doc) => carsArray.push(doc.data()));
-        console.log(carsArray);
-        resolve(carsArray);
-      })
-      .catch((err) => console.log(err));
-  });
-}
+
 
 if (sessionStorage.getItem("loggedUser") != null) {
   var currentUser = JSON.parse(sessionStorage.getItem("loggedUser")).username;
@@ -56,23 +58,23 @@ async function renderElements(elements) {
     for (let i = 0; i < elements.length; i++) {
       // CONDITIONAL RENDERING - owner can delete the post, while other users can buy it
       if (elements[i].owner == currentUser) {
-        var mainButton =
-          "<button class='main-button delete-car'>Delete</button>";
+        var mainButton ="<button class='main-button delete-car'>Delete</button>";
       } else {
         var mainButton = "<button class='main-button buy-car'>Buy</button>";
       }
       if (elements[i].sold === true) {
-        image_url =
-          "https://www.benchmarkrealty.co.nz/wp-content/uploads/2018/06/sold-stamp-3.png";
+        var sold = "<div class='is-sold'>SOLD</div>";
         if (elements[i].owner !== currentUser) {
           var mainButton = ""; // can't be bought anymore, but stll can be deleted by owner!
         }
       } else {
         image_url = elements[i].imageURL;
+        var sold = "<div class='not-sold'></div>";
       }
       let car = document.createElement("div");
       car.innerHTML = `
             <div class="car-card" data-id="${elements[i].id}">
+                ${sold}
                 <img class="carlist-image" src="${image_url}"/>
                 <div class="carlist-about">
                     <h2 class='carlist-brand-and-model'>${elements[i].brand}  ${elements[i].model}</h2>
@@ -177,11 +179,6 @@ async function buyACar(e) {
 async function deleteItem(e) {
   let id = e.target.parentNode.parentNode.getAttribute("data-id"); //mozda postoji laksi nacin da se do ovoga dodje
 
-  console.log(id);
-  // let storedCars = JSON.parse(localStorage.getItem('cars'));
-
-  let storedCars = await retrieveCarsFromDatabase();
-
   let ask = window.confirm(`Are you sure you want to delete?`);
   if (ask === false) {
     return false;
@@ -190,7 +187,6 @@ async function deleteItem(e) {
       .collection("cars")
       .doc(id)
       .delete()
-      .then(() => console.log("done"));
 
     window.location.reload();
   }
@@ -210,17 +206,16 @@ async function moreInfo(e) {
     .getElementsByClassName("more-info-cancel")[0]
     .addEventListener("click", funcX);
 
-  const carlist = await retrieveCarsFromDatabase();
+  const carlist = await retrieveCars();
 
   const carModelInfo =
     e.target.parentNode.parentNode.children[1].children[0].textContent;
 
-  let moreInfoVin =
+  const moreInfoVin =
     e.target.parentNode.parentNode.children[1].children[2].textContent;
 
   for (let i = 0; i < carlist.length; i++) {
     if (carlist[i].VIN == moreInfoVin) {
-      // console.log(carlist[i]);
 
       carDetails.innerHTML = `
                 <div class="car-details-image">
@@ -241,9 +236,7 @@ async function moreInfo(e) {
     }
   }
 
-  // console.log(moreInfoVin);
-
-  let wikiLink = `https://en.wikipedia.org/w/api.php?action=query&titles=${carModelInfo}&prop=extracts|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*`;
+  const wikiLink = `https://en.wikipedia.org/w/api.php?action=query&titles=${carModelInfo}&prop=extracts|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*`;
 
   fetch(wikiLink)
     .then((response) => response.json())
@@ -276,7 +269,6 @@ async function moreInfo(e) {
     });
 }
 
-// exit from more info...
 function funcX() {
   window.location.reload();
 }
@@ -286,13 +278,11 @@ for (let i = 0; i < ApproveBuyBtns.length; i++) {
   ApproveBuyBtns[i].addEventListener("click", buyACar);
 }
 
-// FILTERING
-
 const searchByName = document.getElementById("search-brand");
 searchByName.addEventListener("input", filterCarsByName);
 
 async function filterCarsByName() {
-  let carlist = await retrieveCarsFromDatabase();
+  let carlist = await retrieveCars();
 
   let filteredCars = carlist.filter((car) => {
     if (
@@ -317,8 +307,7 @@ async function filterByPrice() {
   let lowestPrice = document.getElementById("search-price-lowest").value;
   let highestPrice = document.getElementById("search-price-highest").value;
 
-  let carlist = await retrieveCarsFromDatabase();
-  // RADI ALI NE BI BILO LOSE UBACITI I SORTIRANJE PO CENI ASC I DESC...
+  let carlist = await retrieveCars();
 
   if (highestPrice === "") {
     highestPrice = 99999999999;
@@ -329,17 +318,10 @@ async function filterByPrice() {
   }
 
   let filteredByPrice = carlist.filter((car) => {
-    if (car.price) {
-      //zrelo za izbacivanje kada napravim da ne moze da se doda auto bez cene
-      if (
-        car.price >= parseInt(lowestPrice) &&
-        car.price <= parseInt(highestPrice)
-      ) {
+      if (car.price >= parseInt(lowestPrice) &&car.price <= parseInt(highestPrice)) {
         return car;
       }
-    }
   });
   renderElements(filteredByPrice);
 }
 
-// NAPRAVITI DA OBA SEARCHA VAZE U ISTO VREME AKO JE TO MOGUCE.....
