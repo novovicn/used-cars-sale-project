@@ -56,6 +56,7 @@ async function renderElements(elements) {
     }
 
     for (let i = 0; i < elements.length; i++) {
+      let image_url = elements[i].imageURL;
       // CONDITIONAL RENDERING - owner can delete the post, while other users can buy it
       if (elements[i].owner == currentUser) {
         var mainButton ="<button class='main-button delete-car'>Delete</button>";
@@ -68,7 +69,6 @@ async function renderElements(elements) {
           var mainButton = ""; // can't be bought anymore, but stll can be deleted by owner!
         }
       } else {
-        image_url = elements[i].imageURL;
         var sold = "<div class='not-sold'></div>";
       }
       let car = document.createElement("div");

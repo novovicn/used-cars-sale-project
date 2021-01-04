@@ -6,20 +6,8 @@ const carAddedAlert = document.getElementsByClassName("car-added")[0];
 const errorMessages = document.getElementById("car-form-errors");
 const hamburgerBtnSellCar = document.getElementsByClassName("hamburger-btn")[0];
 
-function retrieveCarsDB() {
-  return new Promise((res, rej) => {
-    axios
-      .get("https://used-cars-sale-default-rtdb.firebaseio.com/cars.json")
-      .then((response) => {
-        let cars = Object.values(response.data);
-        console.log(cars);
-        res(cars);
-      })
-      .catch((err) => console.log(err));
-  });
-}
 
-function retrieveCarsFirestore() {
+function retrieveCars() {
   return new Promise((resolve, reject) => {
     db.collection("cars")
       .get()
@@ -27,24 +15,13 @@ function retrieveCarsFirestore() {
         let carsArray = [];
         console.log(snapshot.docs);
         snapshot.docs.forEach((doc) => carsArray.push(doc.data()));
-        console.log(carsArray);
         resolve(carsArray);
       })
       .catch((err) => console.log(err));
   });
 }
 
-// const cars = db.collection('cars').get().then(snapshot => {
-//   let carsArray = [];
-//   console.log(snapshot.docs);
-//   snapshot.docs.forEach(doc => carsArray.push(doc.data()));
-//   console.log(carsArray);
-//   return carsArray;
-// });
-
 carForm.onsubmit = addCarToDB;
-
-// TODO: IZ PROMISE IZVUCI CARLIST NEKAKO......
 
 window.onload = function () {
   if (loggedUser != null) {
@@ -80,12 +57,40 @@ async function addCarToDB(e) {
     imageURL = "img/unknown.png";
   }
 
-  // INPUT VALIDATION
+
+  const isValid = await validateData(brand, model, year, vin, price);
+
+  if(isValid){
+    let car = {
+      brand: brand,
+      model: model,
+      year: year,
+      imageURL: imageURL,
+      mileage: mileage,
+      owner: loggedUser.username,
+      VIN: vin,
+      price: price,
+      sold: false,
+      created_at: Date.now(),
+    };
+  
+    db.collection("cars").add(car);
+
+    carForm.classList.add("vanish");
+    carFromHeading.classList.add("vanish");
+    carAddedAlert.classList.add("appear");
+  }else{
+    console.log('wrong data');
+  }
+}
+
+
+async function validateData(brand, model, year, vin, price){
 
   // must populate required fields
   if (brand == "" || model == "" || year == "" || vin == "" || price == "") {
     errorMessages.innerHTML += "<p>Please populate required fields</p>";
-    return;
+    return false;
   }
 
   //year
@@ -93,65 +98,31 @@ async function addCarToDB(e) {
   if (year < 1900) {
     errorMessages.innerHTML +=
       "<p>Hmm..too old car for this brand new site!</p>";
-    return;
+      return false;
   }
 
   if (year > 2021) {
     errorMessages.innerHTML +=
       "<p>Hmm..you are selling the car that isn't made yet!</p>";
-    return;
+      return false;
   }
 
   // no two same vins
 
-  let carlist = await retrieveCarsFirestore().then((res) => {
+  let carlist = await retrieveCars().then((res) => {
     return res;
   });
 
-  console.log(carlist);
 
   if (carlist) {
     for (let i = 0; i < carlist.length; i++) {
       if (carlist[i].VIN === vin) {
         errorMessages.innerHTML +=
           "<p> Can't add two cars with the same VIN</p>";
-        return;
+          return false;
       }
     }
   }
 
-  // let cars=[];
-
-  let car = {
-    brand: brand,
-    model: model,
-    year: year,
-    imageURL: imageURL,
-    mileage: mileage,
-    owner: loggedUser.username,
-    VIN: vin,
-    price: price,
-    sold: false,
-    created_at: Date.now(),
-  };
-
-  //////////// PROBA DODAVANJE U DATABASE
-
-  db.collection("cars").add(car);
-
-  // if(carlist != null){
-  //     carlist.push(car);
-  //     var carsLS = JSON.stringify(carlist);
-  // }else{
-  //     cars.push(car);
-  //     var carsLS = JSON.stringify(cars);
-  // }
-  // localStorage.setItem('cars', carsLS);
-
-  carForm.classList.add("vanish");
-  carFromHeading.classList.add("vanish");
-  carAddedAlert.classList.add("appear");
+  return true;
 }
-
-// let carsLS = JSON.parse(localStorage.getItem('cars'));
-// return carsLS;
