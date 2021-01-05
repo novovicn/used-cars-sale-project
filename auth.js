@@ -26,21 +26,21 @@ logoutButton.style.display = "none";
 const registeredUsers = retrieveUsersLS();
 
 window.onload = () => {
-  registrationForm.style.display = "none";
-  loginForm.style.display = "none";
+  registrationForm.classList.remove('open');
+  loginForm.classList.remove('open');
 };
 
 let users = [];
 var loggedUser = {};
 
 loginButton.addEventListener("click", () => {
-  registrationForm.style.display = "none";
-  loginForm.style.display = "block";
+  registrationForm.classList.remove('open');
+  loginForm.classList.add('open');
   darkenDiv.classList.add("darken-visible");
 });
 registerButton.addEventListener("click", () => {
-  registrationForm.style.display = "block";
-  loginForm.style.display = "none";
+  registrationForm.classList.add('open');
+  loginForm.classList.remove('open');
   darkenDiv.classList.add("darken-visible");
 });
 
@@ -243,8 +243,8 @@ const cancelBtns = document.getElementsByClassName("cancel-auth-form");
 for (let i = 0; i < cancelBtns.length; i++) {
   cancelBtns[i].addEventListener("click", (e) => {
     e.preventDefault();
-    registrationForm.style.display = "none";
+    registrationForm.classList.remove('open');
     darkenDiv.classList.remove("darken-visible");
-    loginForm.style.display = "none";
+    loginForm.classList.remove('open');
   });
 }

@@ -2,6 +2,9 @@ const container = document.getElementsByClassName("sale-container")[0];
 const buyCheckout = document.getElementById("buy-checkout");
 const moreInfoSection = document.getElementsByClassName("more-info-section")[0];
 const carlistHeading = document.getElementsByClassName("carlist-heading")[0];
+const paginationContainer = document.querySelector('.pagination-container');
+
+var current_page;
 
 function retrieveCars() {
   return new Promise((resolve, reject) => {
@@ -40,8 +43,10 @@ if (sessionStorage.getItem("loggedUser") != null) {
   var currentUser = JSON.parse(sessionStorage.getItem("loggedUser")).username;
 }
 
-async function renderElements(elements) {
+function renderElements(elements) {
   container.innerHTML = "";
+
+  console.log(elements.length);
 
   if (elements != null) {
     // newest first
@@ -55,45 +60,15 @@ async function renderElements(elements) {
       }
     }
 
-    for (let i = 0; i < elements.length; i++) {
-      let image_url = elements[i].imageURL;
-      // CONDITIONAL RENDERING - owner can delete the post, while other users can buy it
-      if (elements[i].owner == currentUser) {
-        var mainButton ="<button class='main-button delete-car'>Delete</button>";
-      } else {
-        var mainButton = "<button class='main-button buy-car'>Buy</button>";
-      }
-      if (elements[i].sold === true) {
-        var sold = "<div class='is-sold'>SOLD</div>";
-        if (elements[i].owner !== currentUser) {
-          var mainButton = ""; // can't be bought anymore, but stll can be deleted by owner!
-        }
-      } else {
-        var sold = "<div class='not-sold'></div>";
-      }
-      let car = document.createElement("div");
-      car.innerHTML = `
-            <div class="car-card" data-id="${elements[i].id}">
-                ${sold}
-                <img class="carlist-image" src="${image_url}"/>
-                <div class="carlist-about">
-                    <h2 class='carlist-brand-and-model'>${elements[i].brand}  ${elements[i].model}</h2>
-                    <h3>€<span class="carlist-price"> ${elements[i].price}</span></h3>
-                    <h4 class="carlist-vin hidden">${elements[i].VIN}</h4>
-                </div>
-                <div class="carlist-buttons">
-                    <button class="see-more">Details</button>
-                    ${mainButton}
-                </div>
-            </div>
-            `;
-      container.appendChild(car);
-    }
+    const items_per_page = 6;
+    current_page = 1;
+
+    setupPagination(elements, paginationContainer, items_per_page);
+    pagination(elements, container, items_per_page, current_page);
   } else {
     container.innerHTML =
       "<h1 class='no-cars'>There aren't any cars for sale at the moment!</h1>";
   }
-  await addListeners();
 }
 
 function addListeners() {
@@ -112,6 +87,88 @@ function addListeners() {
   [...moreInfoButtons].forEach(button => {
     button.addEventListener('click', moreInfo);
   });
+
+}
+
+async function pagination(items, wrapper, items_per_page, page) {
+
+  wrapper.innerHTML = '';
+  page--;
+
+  let start = items_per_page * page;
+  let end = start + items_per_page;
+  let paginatedElements = items.slice(start, end);
+  
+  for (let i = 0; i < paginatedElements.length; i++) {
+    let image_url = paginatedElements[i].imageURL;
+
+    if (paginatedElements[i].owner == currentUser) {
+      var mainButton ="<button class='main-button delete-car'>Delete</button>";
+    } else {
+      var mainButton = "<button class='main-button buy-car'>Buy</button>";
+    }
+    if (paginatedElements[i].sold === true) {
+      var sold = "<div class='is-sold'>SOLD</div>";
+      if (paginatedElements[i].owner !== currentUser) {
+        var mainButton = ""; 
+      }
+    } else {
+      var sold = "";
+    }
+    let car = document.createElement("div");
+    car.innerHTML = `
+          <div class="car-card" data-id="${paginatedElements[i].id}">
+              ${sold}
+              <img class="carlist-image" src="${image_url}"/>
+              <div class="carlist-about">
+                  <h2 class='carlist-brand-and-model'>${paginatedElements[i].brand}  ${paginatedElements[i].model}</h2>
+                  <h3>€<span class="carlist-price"> ${paginatedElements[i].price}</span></h3>
+                  <h4 class="carlist-vin hidden">${paginatedElements[i].VIN}</h4>
+              </div>
+              <div class="carlist-buttons">
+                  <button class="see-more">Details</button>
+                  ${mainButton}
+              </div>
+          </div>
+          `;
+    container.appendChild(car);
+  }
+  await addListeners();
+  
+}
+
+function setupPagination(items, wrapper, items_per_page){
+  wrapper.innerHTML='';
+
+  let page_count = Math.ceil(items.length / items_per_page);
+
+  for( let i = 1; i < page_count + 1; i++){
+    let btn = paginationButton(i, items, items_per_page);
+    wrapper.append(btn);
+  }
+}
+
+function paginationButton(page, items, items_per_page){
+
+  let button = document.createElement('button');
+  button.innerText = page;
+
+  if(current_page === page){
+    button.classList.add('active');
+  }
+
+  button.addEventListener('click', () => {
+    current_page = page;
+    pagination(items, container, items_per_page, current_page);
+    
+    let current_btn = document.querySelector('.pagination-container button.active');
+    current_btn.classList.remove('active');
+    
+    button.classList.add('active');
+
+  })
+
+  return button;
 
 }
 

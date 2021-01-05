@@ -26,17 +26,18 @@ carForm.onsubmit = addCarToDB;
 window.onload = function () {
   if (loggedUser != null) {
     if (loggedUser.username != null) {
-      carForm.style.display = "block";
-      loginPrompt.style.display = "none";
+      carForm.classList.add('open');
+      loginPrompt.classList.remove('open');
+      carFromHeading.classList.add('open');
     } else {
-      carForm.style.display = "none";
-      loginPrompt.style.display = "inherit";
-      carFromHeading.style.display = "none";
+      carForm.classList.remove('open')
+      loginPrompt.classList.add('open');
+      carFromHeading.classList.remove('open')
     }
   } else {
-    carForm.style.display = "none";
-    loginPrompt.style.display = "inherit";
-    carFromHeading.style.display = "none";
+    carForm.classList.remove('open')
+    loginPrompt.classList.add('open');
+    carFromHeading.classList.remove('open')
   }
 };
 

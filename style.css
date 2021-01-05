@@ -185,31 +185,34 @@ ul {
   }
 }
 
-#user-registration,
-#user-login {
+.auth-form {
   border: none;
   border-radius: 0.5rem;
   width: 35%;
   margin-top: 2rem;
   position: absolute;
   top: 11rem;
-  right: 1rem;
-  /* text-align: center; */
-  animation: moveInFromRight 0.8s;
+  right: -100%;
   padding: 2.5rem;
   background-color: rgba(255, 255, 255, 0.6);
   z-index: 100;
+  transition: all .8s;
 }
 
-#user-registration input,
-#user-login input {
+.auth-form.open{
+  position: absolute;
+  top: 11rem;
+  right: 1rem;
+}
+
+.auth-form input {
   border-radius: 2.5rem;
   border: none;
   padding-left: 1rem;
   margin-top: 1rem;
 }
-#user-registration input[type="submit"],
-#user-login input[type="submit"] {
+
+.auth-form input[type="submit"] {
   background-color:  rgb(206, 76, 76);
   color: white;
   text-transform: uppercase;

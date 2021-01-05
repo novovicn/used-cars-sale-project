@@ -28,8 +28,8 @@
     margin: 0 auto;
     background-color: white;
     position: relative;
+    padding-bottom: 20px;
 }
-
 
 .main-heading{
     height: 28rem;
@@ -115,6 +115,26 @@
     max-width: 110rem;
     margin: 2rem auto;
     padding: 2rem;
+}
+
+.pagination-container{
+    text-align: center;
+}
+
+.pagination-container > button{
+    height: 30px;
+    width: 30px;
+    margin: 3px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.pagination-container > button.active{
+    border: none;
+    color: white;
+    background-color: black;
 }
 
 .car-card{
@@ -419,6 +439,7 @@
         grid-template-columns: 1fr 1fr;
     }
 
+    
     .car-details{
         height: 30rem;        
     }
